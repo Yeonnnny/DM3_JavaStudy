@@ -3,26 +3,27 @@ import java.util.Arrays;
 
 public class Customer {
     
-    private String name; 
-    private String id; 
-    private String pwd;
-    private int borrowCount;
-
-    private final int MAX_BOOKNUM = 5;
-    private Book[] borringBook = new Book[MAX_BOOKNUM];
-    private int delayDay ;
+    private String name; // 유저 이름
+    private String id;  // 유저 아이디
+    private String pwd; // 유저 비밀번호
+    private int borrowCount; // 총 대출 횟수
+    private final int MAX_BOOKNUM = 5; // 한 사람당 대출 가능한 책 수
+    private Book[] borringBook = new Book[MAX_BOOKNUM]; // 대출한 책 리스트
+    //private int delayDay ;
     
+    // 생성자
     public Customer() {}
 
-    public Customer(String name, String id, String pwd, int borrowCount, int delayDay, Book[] borringBook) {
+    public Customer(String name, String id, String pwd, int borrowCount, Book[] borringBook) {
         this.name = name;
         this.id = id;
         this.pwd = pwd;
         this.borrowCount = borrowCount;
-        this.delayDay = delayDay;
         this.borringBook = borringBook;
     }
 
+
+    // getter/setter
     public String getName() {
         return name;
     }
@@ -39,10 +40,6 @@ public class Customer {
         this.id = id;
     }
 
-    public String getPwd() {
-        return pwd;
-    }
-
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
@@ -53,14 +50,6 @@ public class Customer {
 
     public void setBorrowCount(int borrowCount) {
         this.borrowCount = borrowCount;
-    }
-
-    public int getDelayDay() {
-        return delayDay;
-    }
-
-    public void setDelayDay(int delayDay) {
-        this.delayDay = delayDay;
     }
 
     public int getMAX_BOOKNUM() {
@@ -77,9 +66,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer [name=" + name + ", id=" + id + ", pwd=" + pwd + ", borrowCount=" + borrowCount
-                + ", MAX_BOOKNUM=" + MAX_BOOKNUM + ", borringBook=" + Arrays.toString(borringBook) + ", delayDay="
-                + delayDay + "]";
+        return "Customer [name=" + name + "\n borringBook=" + Arrays.toString(borringBook)  + "]";
     }
 
 

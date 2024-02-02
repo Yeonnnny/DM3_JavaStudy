@@ -1,11 +1,14 @@
 # 도서 관리 시스템 
 
+** commit msg : 'ㅛymmdd '수정한파일경로' : 수정한 내용 , ...'
 
 ## vo
 
 - Customer.java
 - Book.java
 
+- 인당 대출가능 책 수 : 5 권
+- 책 대출 기간 : 14일
 
 [Customer]
 - name : 회원 이름
@@ -13,7 +16,8 @@
 - pwd : 회원 비밀번호
 - borringBook : 현재 대출 중인 책 (Book 객체 로 저장)
 - borrowCount : 총 대출 횟수 -> 독서왕
-- delayDay : 연체 일자
+- final MAX_BOOKNUM : 1인당 대출 가능 권 수 = 5
+// delayDay : 연체 일자 -> 책마다 존재했으면 좋겠음... 
 
 [Book]
 - bookID (pk): 책 아이디 (pk)
@@ -22,6 +26,8 @@
 - genre : 책 장르
 - available : 대출 가능 여부
 - borrowCount : 대출 횟수 -> 베스트 셀러
+- borrow_date : 
+- return_date :
 
 
 ## service (인터페이스 & 구현클래스)
