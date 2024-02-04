@@ -3,30 +3,30 @@ import java.time.Period;
 
 public class Book {
 
-    private String bookID;  
+    private String bookID;
     private String bookName;
     private String author;
     private String genre;
     private boolean available; // 대출 가능 여부
-    private int borrowCount;
-    // 대출 날짜 
-    private LocalDate borrow_date ; // 대출한 날
-    private LocalDate return_date ; // 반납해야할 날
-    //private int delayDay; // (return_date-현재날짜  <0 )? 연체 : 연체x
+    private int borrowCount; // 대출 횟수 -> 베스트 셀러
+    // 대출 날짜
+    private LocalDate borrow_date; // 대출일
+    private LocalDate return_date; // 반납일
+    // private int delayDay; // (return_date-현재날짜 <0 )? 연체 : 연체x
 
-    //생성자
-    public Book() {}
+    // 생성자
+    public Book() {
+    }
 
     public Book(String bookID, String bookName, String author, String genre) {
         this.bookID = bookID;
         this.bookName = bookName;
         this.author = author;
         this.genre = genre;
-        
         this.available = false;
-        this.borrowCount +=1;
+        this.borrowCount += 1;
         this.borrow_date = LocalDate.now();
-        this.return_date= borrow_date.plusDays(14);
+        this.return_date = borrow_date.plusDays(14);
     }
 
     // getter/setter
@@ -62,10 +62,15 @@ public class Book {
         this.genre = genre;
     }
 
-    // 기간관련된 변수는 set 불가능
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
     public boolean isAvailable() {
         return available;
     }
+
+    // 기간관련된 변수는 set 불가능
 
     public int getBorrowCount() {
         return borrowCount;
@@ -79,16 +84,15 @@ public class Book {
         return return_date;
     }
 
-
-
     // 일반 메소드
     /**
      * 현재 날짜와 반납 날짜 간 차이 반환
      * (음수인 경우, 연체된 것임)
+     * 
      * @param : 없음
-     * @return  남은 반납기한
+     * @return 남은 반납기한
      **/
-    public int remainigPeriod(){
+    public int remainigPeriod() {
         return Period.between(LocalDate.now(), return_date).getDays();
     }
 
@@ -98,14 +102,5 @@ public class Book {
                 + ", available=" + available + ", borrowCount=" + borrowCount + ", borrow_date=" + borrow_date
                 + ", return_date=" + return_date + ", 남은 반납기한=" + remainigPeriod() + "]";
     }
-
-    
-
-  
-
-
-    
-
-
 
 }
