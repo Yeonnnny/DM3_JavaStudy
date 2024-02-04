@@ -4,20 +4,16 @@
 
 ## vo
 
-- Customer.java
-- Book.java
-
-- 인당 대출가능 책 수 : 5 권
+- 인당 대출 가능 책 개수 : 5 권
 - 책 대출 기간 : 14일
 
 [Customer]
-- id (pk) : 회원 아이디 
-- pwd : 회원 비밀번호
-- name : 회원 이름
-- borringBook : 현재 대출 중인 책 (Book 객체 로 저장)
-- borrowCount : 총 대출 횟수 -> 독서왕
-- final MAX_BOOKNUM : 1인당 대출 가능 권 수 = 5
-// delayDay : 연체 일자 -> 책마다 존재했으면 좋겠음... 
+- String id (pk) : 회원 아이디 
+- String pwd : 회원 비밀번호
+- String name : 회원 이름
+- Book[] borringBook : 현재 대출 중인 책 (Book 배열)
+- int borrowCount : 총 대출 횟수 -> 독서왕
+- final int MAX_BOOKNUM = 5 : 1인당 대출 가능 권 수
 
 [Book]
 - bookID (pk): 책 아이디 (pk)
