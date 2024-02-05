@@ -200,7 +200,7 @@ public class LibSystemUI {
     private void borrow_book() {
         System.out.println("\n[도서 대출]");
         String id,bookId;
-        System.out.println("회원 아이디 입력 : ");
+        System.out.print("회원 아이디 입력 : ");
         id = scanner.next();
         // 등록된 회원인지 확인
         if (cs.search(id)==null) {
@@ -213,7 +213,7 @@ public class LibSystemUI {
             return;
         }
 
-        System.out.println("도서 번호 입력 : ");
+        System.out.print("도서 번호 입력 : ");
         bookId = scanner.next();
         // 등록된 책인지 확인
         if (bs.search(bookId)==null) {
@@ -238,10 +238,39 @@ public class LibSystemUI {
     }
     
     private void return_book() {
+        System.out.println("\n[도서 반납]");
+        String id,bookId;
+        System.out.print("회원 아이디 입력 : ");
+        id = scanner.next();
+        // 등록된 회원인지 확인
+        if (cs.search(id)==null) {
+            System.out.println("[오류] 등록되지 않은 회원입니다. 메인 메뉴로 돌아갑니다.");
+            return;
+        }
 
+        // 현재 대출중인 책 목록 출력
+        System.out.println("<현재 대출 중인 책 목록>");
+        printBooklist(cs.returnBorrowingBooklist(id));
+        System.out.println("------------------------------------------------------------");
+        while (true) {
+            System.out.print("도서 번호 입력 : ");
+            bookId = scanner.next();
+            // 등록된 책인지 확인
+            if (cs.isBookidExist(id,bookId))  break; // true 이면 반복문 탈출
+            System.out.println("[오류] 대출 중인 도서 번호가 아닙니다. 정확하게 입력해주세요.");
+        }
 
+        boolean result = cs.returnBook(id, bookId);
+        if(result) System.out.println("# 도서 반납이 성공적으로 완료되었습니다.");
     }
 
+    public void printBooklist(Book[] books){
+        for (int i =0;i<books.length;i++){
+            System.out.printf("[%d] ",i+1);
+            System.out.println(books[i]);
+        }
+        
+    }
     
     
     

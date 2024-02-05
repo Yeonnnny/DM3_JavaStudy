@@ -60,7 +60,9 @@ public class CustomerServiceImpl implements CustomerService{
         Book book = bs.search(bookid);
 
         // 대출중인 도서 목록에 추가
-        customer.setBorringBook(book);
+        Book[] booklists = customer.getBorringBooks();
+        booklists[customer.getSize()]=book;
+        customer.setBorringBooks(booklists);
 
         // 대출 불가능으로 변경
         book.setAvailable(false);
@@ -68,13 +70,34 @@ public class CustomerServiceImpl implements CustomerService{
         // 회원, 도서 모두 대출 횟수 +1
         customer.setBorrowCount(customer.getBorrowCount()+1);
         book.setBorrowCount(book.getBorrowCount()+1);
-
+       
         return book;
     }
 
     @Override
-    public boolean returnBook(String bookid) {
-        return false;
+    public boolean returnBook(String id, String bookid) {
+        Customer customer = search(id);
+        Book book = bs.search(bookid);
+
+        // 대출 중인 도서 목록에서 책 아이디가 같은 책 배열의 위치 저장
+        int index =-1;
+        Book[] booklists = customer.getBorringBooks();
+        for(int i=0;i<booklists.length;i++){
+            if(booklists[i].getBookID().equals(bookid)){
+                index = i;
+                break;
+            }
+        }
+        // 도서 목록에서 제거
+        for(int i=index; i< booklists.length-1;i++){
+            booklists[i] = booklists[i+1];
+        }
+        customer.setBorringBooks(booklists);
+
+        // 책 대출 가능으로 변경
+        book.setAvailable(true);
+
+        return true;
     }
 
     @Override
@@ -86,6 +109,28 @@ public class CustomerServiceImpl implements CustomerService{
     public int customerBorrowCount(String id) {
         Customer customer = search(id);
         return customer.getSize();
+    }
+
+    @Override
+    public Book[] returnBorrowingBooklist(String id) {
+        Customer customer = search(id);
+        return customer.getBorringBook();
+    }
+
+    @Override
+    public boolean isBookidExist(String id, String bookid) {
+        boolean isExist = false;
+        Customer customers = search(id);
+        // 현재 대출중인 책 리스트
+        Book[] books = customers.getBorringBook();
+        
+        for(int i=0;i<books.length;i++){
+            if (books[i].getBookID().equals(bookid)){
+                isExist = true;
+                break;
+            }
+        }
+        return isExist;
     }
 
 }

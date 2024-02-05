@@ -56,11 +56,11 @@ public interface CustomerService {
 
     /**
      * 반납할 책의 id를 입력 받아 book의 대출 여부 값을 변경하고  customer의 대출 중인 책 리스트에서 제거하는 함수이다.
-     * 
+     * @param id
      * @param bookid
      * @return
      */
-    public boolean returnBook(String bookid);
+    public boolean returnBook(String id,String bookid);
 
     /**
      *  총 회원 수 빈환하는 함수 
@@ -75,4 +75,21 @@ public interface CustomerService {
      * @return
      */
     public int customerBorrowCount(String id);
+
+    /**
+     * 회원 아이디를 입력 받아 회원이 대출 중인 책 리스트 반환하는 함수
+     * @param id
+     * @return
+     */
+    public Book[] returnBorrowingBooklist(String id);
+    
+    /**
+     * 회원 아이디와 책 아이디를 입력 받아 회원이 대출중인 책과 동일한 책 아이디가 있는지 확인하는 함수
+     * @param id
+     * @param bookid
+     * @return
+     */
+    public boolean isBookidExist(String id, String bookid);
+
+
 }

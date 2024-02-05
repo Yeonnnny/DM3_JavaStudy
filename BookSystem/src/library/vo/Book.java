@@ -103,8 +103,7 @@ public class Book {
     @Override
     public String toString() {
         return "Book [bookID=" + bookID + ", bookName=" + bookName + ", author=" + author + ", genre=" + genre
-                + ", available=" + available + ", borrowCount=" + borrowCount + ", borrow_date=" + borrow_date
-                + ", return_date=" + return_date + ", 남은 반납기한=" + remainigPeriod() + "]";
+                + ", borrow_date=" + borrow_date + ", return_date=" + return_date + ", 남은 반납기한=" + remainigPeriod() + "]";
     }
 
 }

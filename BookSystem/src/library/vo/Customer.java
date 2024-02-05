@@ -60,18 +60,19 @@ public class Customer {
         return MAX_BOOKNUM;
     }
 
-    public Book[] getBorringBook() {
+    public Book[] getBorringBooks() {
         return borringBooks;
     }
 
-    public void setBorringBook(Book borringBook) {
-        this.borringBooks[size] = borringBook;
-        this.size+=1;
+    public void setBorringBooks(Book[] borringBooks) {
+        this.borringBooks = borringBooks;
+        this.size = borringBooks.length;
     }
 
     public int getSize() {
-        return size+1;
+        return size;
     }
+    
 
 
 
