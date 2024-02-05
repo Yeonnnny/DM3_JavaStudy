@@ -1,8 +1,9 @@
-import java.sql.Date;
+package BookSystem.src.library.vo;
+
 import java.util.Arrays;
 
 public class Customer {
-
+    
     private String id; // 유저 아이디
     private String pwd; // 유저 비밀번호
     private String name; // 유저 이름
@@ -11,8 +12,7 @@ public class Customer {
     private Book[] borringBook = new Book[MAX_BOOKNUM]; // 대출한 책 리스트
 
     // 생성자
-    public Customer() {
-    }
+    public Customer() {}
 
     public Customer(String id, String pwd, String name, int borrowCount, Book[] borringBook) {
         this.id = id;
@@ -34,6 +34,9 @@ public class Customer {
 
     public void setPwd(String pwd) {
         this.pwd = pwd;
+    }
+    public String getPwd(){
+        return pwd;
     }
 
     public String getName() {
@@ -69,4 +72,5 @@ public class Customer {
         return "Customer [name=" + name + "\n borringBook=" + Arrays.toString(borringBook) + "]";
     }
 
+    
 }

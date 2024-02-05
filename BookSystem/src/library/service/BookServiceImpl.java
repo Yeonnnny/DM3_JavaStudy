@@ -1,10 +1,11 @@
-package BookManagementProject.service;
+package BookSystem.src.library.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookServiceImpl implements BookService {
+import BookSystem.src.library.vo.Book;
 
+public class BookServiceImpl implements BookService{
     private List<Book> books = new ArrayList<>();
 
     @Override
@@ -33,7 +34,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public ArrayList<Book> selectAll() {
+    public List<Book> selectAll() {
         return books;
     }
 }

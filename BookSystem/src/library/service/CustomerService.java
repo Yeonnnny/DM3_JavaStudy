@@ -1,6 +1,8 @@
-package BookManagementProject.service;
+package BookSystem.src.library.service;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import BookSystem.src.library.vo.Customer;
 
 public interface CustomerService {
     /**
@@ -22,7 +24,7 @@ public interface CustomerService {
     /**
      * 회원리스트 반환
      */
-    public ArrayList<Customer> selectAll();
+    public List<Customer> selectAll();
 
     /**
      * 회원 정보 수정 (이름, 비밀번호)
@@ -62,5 +64,4 @@ public interface CustomerService {
      * @return
      */
     public int getCount();
-
 }

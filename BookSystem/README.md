@@ -58,11 +58,35 @@
 
 
 ## ui
-- BookSystemUI.java
+- LibSystemUI.java
+
+** 메인 메뉴
+<pre>
+        System.out.println("=============[MENU]==============");
+        System.out.println("\n-----------[회원 관리]-----------");
+        System.out.println("\t1. 회원 정보 입력");
+        System.out.println("\t2. 회원 정보 삭제");
+        System.out.println("\t3. 회원 정보 수정");
+        System.out.println("\t4. 회원 정보 검색");
+        System.out.println("\t5. 전체 회원 정보");
+        System.out.println("\n-----------[도서 관리]-----------");
+        System.out.println("\t6. 도서 정보 입력");
+        System.out.println("\t7. 도서 정보 삭제");
+        System.out.println("\t8. 도서 정보 수정");
+        System.out.println("\n-----------[도서서비스]-----------");
+        System.out.println("\t9. 전체 도서 정보");
+        System.out.println("\t10. 도서 정보 검색");
+        System.out.println("\t11. 도서 대출");
+        System.out.println("\t12. 도서 반납");
+        System.out.println("\n-------------[종료]--------------");
+        System.out.println("\t0. 프로그램 종료");
+        System.out.println("\n==================================");
+        System.out.print(" ** 선택> ");
+</pre>
 
 
 ## main
-- BookSystemMain.java
+- LibSystemMain.java
 
 
 

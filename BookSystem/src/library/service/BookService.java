@@ -1,4 +1,8 @@
-package BookManagementProject.service;
+package BookSystem.src.library.service;
+
+import java.util.List;
+
+import BookSystem.src.library.vo.Book;
 
 public interface BookService {
     /**
@@ -45,6 +49,6 @@ public interface BookService {
      * 
      * @return
      */
-    public ArrayList<Book> selectAll();
+    public List<Book> selectAll();
 
 }
