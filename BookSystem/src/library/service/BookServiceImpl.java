@@ -5,7 +5,7 @@ import java.util.List;
 
 import BookSystem.src.library.vo.Book;
 
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl implements BookService {
     private List<Book> books = new ArrayList<>();
 
     @Override
@@ -44,6 +44,4 @@ public class BookServiceImpl implements BookService{
         return book.isAvailable();
     }
 
-    
-    
 }

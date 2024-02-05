@@ -38,13 +38,17 @@
 <pre>
     public Customer search(String id);           // 회원 검색
     public boolean insert(Customer customer);    // 회원 가입
-    public ArrayList<Customer> selectAll();      // 회원 리스트 반환
+    public List<Customer> selectAll();      // 회원 리스트 반환
     public boolean update(Customer customer);    // 회원 정보 수정(이름, 비밀번호) 
     public boolean delete(String id);            // 회원 삭제
-    //public boolean borrowBook(String bookid);    // 책 대출
-    public Book borrowBook(String bookid);    // 책 대출
-    public  boolean returnBook(String bookid);    // 책 반납
-    public int getCount();                       // 회원 수 반환
+    public int getCount();                       // 총 회원 수 반환
+    // 도서 관련 함수
+    public Book borrowBook(String id,String bookid);    // 책 대출
+    public boolean returnBook(String id,String bookid);   // 책 반납
+    public int customerBorrowCount(String id); //대출 중인 책 수 반환
+    public Book[] returnBorrowingBooklist(String id); // 현재 대출 중인 책 리스트 반환
+    public boolean isBookidExist(String id, String bookid);  // 현재 대출 중인 책인지 확인
+
 </pre>
 
 ### Book 인터페이스
