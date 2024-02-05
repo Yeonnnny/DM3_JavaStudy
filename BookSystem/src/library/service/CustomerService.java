@@ -2,6 +2,7 @@ package BookSystem.src.library.service;
 
 import java.util.List;
 
+import BookSystem.src.library.vo.Book;
 import BookSystem.src.library.vo.Customer;
 
 public interface CustomerService {
@@ -42,16 +43,19 @@ public interface CustomerService {
      */
     public boolean delete(String id);
 
-    /**
-     * 책 대출
-     * 
-     * @param bookid
-     * @return
-     */
-    public boolean borrowBook(String bookid);
+    
 
     /**
-     * 책 반납
+     * 책 id를 입력 받아 book의 대출 여부 값을 변경하고 customer의 대출 중인 책 리스트에 삽입하는 함수이다.   
+     *  그리고 customer의 borrowCount, book의 borrowCount 모두 1을 증가시켜줘야 함 
+     * @param id
+     * @param bookid
+     * @return 대출한 책 개체
+     */
+    public Book borrowBook(String id,String bookid);
+
+    /**
+     * 반납할 책의 id를 입력 받아 book의 대출 여부 값을 변경하고  customer의 대출 중인 책 리스트에서 제거하는 함수이다.
      * 
      * @param bookid
      * @return
@@ -59,9 +63,16 @@ public interface CustomerService {
     public boolean returnBook(String bookid);
 
     /**
-     * 회원 수
+     *  총 회원 수 빈환하는 함수 
      * 
      * @return
      */
     public int getCount();
+
+    /**
+     * 회원 아이디를 입력받아 회원의 현재 대출중인 책의 권 수 반환하는 함수
+     * @param id
+     * @return
+     */
+    public int customerBorrowCount(String id);
 }

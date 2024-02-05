@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import BookSystem.src.library.service.BookServiceImpl;
 import BookSystem.src.library.service.CustomerServiceImpl;
+import BookSystem.src.library.vo.Book;
 import BookSystem.src.library.vo.Customer;
 
 public class LibSystemUI {
@@ -190,18 +191,54 @@ public class LibSystemUI {
         
     }
     private void printAllBook() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'printAllBook'");
+        
     }
     private void searchBook() {
         
     }
     
     private void borrow_book() {
+        System.out.println("\n[도서 대출]");
+        String id,bookId;
+        System.out.println("회원 아이디 입력 : ");
+        id = scanner.next();
+        // 등록된 회원인지 확인
+        if (cs.search(id)==null) {
+            System.out.println("[오류] 등록되지 않은 회원입니다. 메인 메뉴로 돌아갑니다.");
+            return;
+        }
+        if(cs.customerBorrowCount(id)==5){
+            System.out.println("# 현재 5권을 대출중입니다. 한 사람당 5권까지 대출할 수 있습니다. ");
+            System.out.println("# 메인 메뉴로 돌아갑니다. ");
+            return;
+        }
+
+        System.out.println("도서 번호 입력 : ");
+        bookId = scanner.next();
+        // 등록된 책인지 확인
+        if (bs.search(bookId)==null) {
+            System.out.println("[오류] 등록되지 않은 책입니다. 메인 메뉴로 돌아갑니다.");
+            return;
+        }
+        // 대출 가능한 책인지 확인
+        if (!(bs.possibleBorrow(bookId))){
+            System.out.println("# 대출이 불가능한 책입니다. 메인 메뉴로 돌아갑니다.");
+            return;
+        }
+
+        System.out.println("# 대출 가능한 책입니다.");
+        Book book = cs.borrowBook(id,bookId);
+        System.out.println("*******************************************");
+        System.out.println(book);
+        System.out.println("*******************************************");
+        System.out.println("\n# 도서 대출이 성공적으로 완료되었습니다. ");
+        System.out.printf("# 현재 대출 중인 책은 총 (%d/5)권입니다.%n",cs.customerBorrowCount(id));
+
 
     }
     
     private void return_book() {
+
 
     }
 

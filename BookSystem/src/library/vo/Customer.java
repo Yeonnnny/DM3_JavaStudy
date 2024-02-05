@@ -9,17 +9,18 @@ public class Customer {
     private String name; // 유저 이름
     private int borrowCount; // 총 대출 횟수
     private final int MAX_BOOKNUM = 5; // 한 사람당 대출 가능한 책 수
-    private Book[] borringBook = new Book[MAX_BOOKNUM]; // 대출한 책 리스트
-
+    private Book[] borringBooks = new Book[MAX_BOOKNUM]; // 대출한 책 리스트
+    private int size; // 5권 중 대출 중인 책 수
     // 생성자
     public Customer() {}
 
-    public Customer(String id, String pwd, String name, int borrowCount, Book[] borringBook) {
+    public Customer(String id, String pwd, String name, int borrowCount, Book[] borringBooks) {
         this.id = id;
         this.pwd = pwd;
         this.name = name;
         this.borrowCount = borrowCount;
-        this.borringBook = borringBook;
+        this.borringBooks = borringBooks;
+        this.size = 0;
     }
 
     // getter/setter
@@ -60,17 +61,27 @@ public class Customer {
     }
 
     public Book[] getBorringBook() {
-        return borringBook;
+        return borringBooks;
     }
 
-    public void setBorringBook(Book[] borringBook) {
-        this.borringBook = borringBook;
+    public void setBorringBook(Book borringBook) {
+        this.borringBooks[size] = borringBook;
+        this.size+=1;
     }
+
+    public int getSize() {
+        return size+1;
+    }
+
+
+
+
 
     @Override
     public String toString() {
-        return "Customer [name=" + name + " borringBook=" + Arrays.toString(borringBook) + "]";
+        return "회원 이름 : " + name + " 대출 중 도서 목록 : " + Arrays.toString(borringBooks) + "]";
     }
+
 
     
 }

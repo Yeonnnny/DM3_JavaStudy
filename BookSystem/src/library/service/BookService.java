@@ -51,4 +51,11 @@ public interface BookService {
      */
     public List<Book> selectAll();
 
+     /**
+      * 도서의 대출 가능 여부 확인하는 함수
+      * @param id
+      * @return
+      */
+    public boolean possibleBorrow(String id);
+
 }

@@ -24,8 +24,8 @@ public class Book {
         this.bookName = bookName;
         this.author = author;
         this.genre = genre;
-        this.available = false;
-        this.borrowCount += 1;
+        this.available = true; // 초기 값 : 대출 가능 -> true
+        this.borrowCount = 0;
         this.borrow_date = LocalDate.now();
         this.return_date = borrow_date.plusDays(14);
     }
@@ -63,20 +63,23 @@ public class Book {
         this.genre = genre;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
-
     public boolean isAvailable() {
         return available;
     }
-
-    // 기간관련된 변수는 set 불가능
-
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+   
     public int getBorrowCount() {
         return borrowCount;
     }
 
+    public void setBorrowCount(int borrowCount){
+        this.borrowCount = borrowCount;
+    }
+
+    // 기간관련된 변수는 set 불가능
+    
     public LocalDate getBorrow_date() {
         return borrow_date;
     }

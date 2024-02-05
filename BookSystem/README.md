@@ -41,8 +41,9 @@
     public ArrayList<Customer> selectAll();      // 회원 리스트 반환
     public boolean update(Customer customer);    // 회원 정보 수정(이름, 비밀번호) 
     public boolean delete(String id);            // 회원 삭제
-    public boolean borrowBook(String bookid);    // 책 대출
-    public boolean returnBook(String bookid);    // 책 반납
+    //public boolean borrowBook(String bookid);    // 책 대출
+    public Book borrowBook(String bookid);    // 책 대출
+    public  boolean returnBook(String bookid);    // 책 반납
     public int getCount();                       // 회원 수 반환
 </pre>
 

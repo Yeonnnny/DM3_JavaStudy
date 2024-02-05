@@ -37,4 +37,13 @@ public class BookServiceImpl implements BookService{
     public List<Book> selectAll() {
         return books;
     }
+
+    @Override
+    public boolean possibleBorrow(String id) {
+        Book book = search(id);
+        return book.isAvailable();
+    }
+
+    
+    
 }
