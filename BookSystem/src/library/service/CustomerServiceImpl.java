@@ -114,7 +114,7 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public Book[] returnBorrowingBooklist(String id) {
         Customer customer = search(id);
-        return customer.getBorringBook();
+        return customer.getBorringBooks();
     }
 
     @Override
@@ -122,7 +122,7 @@ public class CustomerServiceImpl implements CustomerService{
         boolean isExist = false;
         Customer customers = search(id);
         // 현재 대출중인 책 리스트
-        Book[] books = customers.getBorringBook();
+        Book[] books = customers.getBorringBooks();
         
         for(int i=0;i<books.length;i++){
             if (books[i].getBookID().equals(bookid)){
