@@ -33,7 +33,7 @@ public class CustomerServiceImpl implements CustomerService{
     public boolean update(Customer customer) {
         for (Customer c : customers) {
             if(c.getId().equals(customer.getId())){
-                c.setPwd(customer.getPwd(););
+                c.setPwd(customer.getPwd());
                 c.setName(customer.getName());
             }        
         }

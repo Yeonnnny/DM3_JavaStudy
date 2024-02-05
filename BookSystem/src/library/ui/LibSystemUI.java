@@ -146,7 +146,7 @@ public class LibSystemUI {
         if (result) System.out.println("# 정보 수정이 성공적으로 완료되었습니다.");
         
     }
-    
+
     private void searchCustomer() {
         System.out.println("\n[회원 정보 조회]");
         String id;
@@ -166,10 +166,17 @@ public class LibSystemUI {
     private void printAllCustomer() {
         System.out.println("[전체 회원 정보 조회]");
         List<Customer> c = cs.selectAll();
+        if(c.size()==0){
+            System.out.println("# 등록된 회원이 없습니다. ");
+            return;
+        }
+        
         for (int i=0;i<c.size();i++) {
             System.out.printf("[%03d] ",i);
             System.out.println(c.get(i));
         }
+        System.out.printf("%n총 %d명의 회원이 존재합니다.%n",c.size());
+
     }
 
     // 도서 서비스

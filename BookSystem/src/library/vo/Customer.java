@@ -69,7 +69,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer [name=" + name + "\n borringBook=" + Arrays.toString(borringBook) + "]";
+        return "Customer [name=" + name + " borringBook=" + Arrays.toString(borringBook) + "]";
     }
 
     
