@@ -2,6 +2,7 @@ package BookSystem.src.library.vo;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 public class Book {
     private String bookID;
@@ -9,11 +10,14 @@ public class Book {
     private String author;
     private String genre;
     private boolean available; // 대출 가능 여부
+    private List<String> borrowingCusId;  // 대출 중인 회원 아이디
     private int borrowCount; // 대출 횟수 -> 베스트 셀러
     // 대출 날짜
     private LocalDate borrow_date; // 대출일
     private LocalDate return_date; // 반납일
     // private int delayDay; // (return_date-현재날짜 <0 )? 연체 : 연체x
+
+
 
     // 생성자
     public Book() {
@@ -25,6 +29,7 @@ public class Book {
         this.author = author;
         this.genre = genre;
         this.available = true; // 초기 값 : 대출 가능 -> true
+        this.borrowingCusId = null;
         this.borrowCount = 0;
         this.borrow_date = LocalDate.now();
         this.return_date = borrow_date.plusDays(14);
@@ -77,7 +82,28 @@ public class Book {
     public void setBorrowCount(int borrowCount){
         this.borrowCount = borrowCount;
     }
+    /**
+     * @return List<String> return the borrowingCusId
+     */
+    public List<String> getBorrowingCusId() {
+        return borrowingCusId;
+    }
+    /**
+     * 대출 시 대출 중인 회원 아이디 리스트에 회원 아이디 추가
+     * @param borrowingCusId
+     */
+    public void setBorrowingCusId(String borrowingCusId) {
+        this.borrowingCusId.add(borrowingCusId);
+    }
 
+    /**
+     * 반납 시 대출 중인 회원 아이디 리스트에서 회원 아이디 제거
+     * @param borrowingCusId
+     */
+    public void removeBorrowingCusId(String borrowingCusId){
+        this.borrowingCusId.remove(borrowingCusId);
+    }
+    
     // 기간관련된 변수는 set 불가능
     
     public LocalDate getBorrow_date() {
@@ -87,6 +113,9 @@ public class Book {
     public LocalDate getReturn_date() {
         return return_date;
     }
+
+    
+
 
     // 일반 메소드
     /**
@@ -105,5 +134,7 @@ public class Book {
         return "Book [bookID=" + bookID + ", bookName=" + bookName + ", author=" + author + ", genre=" + genre
                 + ", borrow_date=" + borrow_date + ", return_date=" + return_date + ", 남은 반납기한=" + remainigPeriod() + "]";
     }
+
+
 
 }

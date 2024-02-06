@@ -66,8 +66,9 @@ public class CustomerServiceImpl implements CustomerService {
         booklists[customer.getSize()] = book;
         customer.setBorringBooks(booklists);
 
-        // 대출 불가능으로 변경
+        // 대출 불가능으로 변경 & 대출 중인 회원 아이디 저장
         book.setAvailable(false);
+        book.setBorrowingCusId(id);
 
         // 회원, 도서 모두 대출 횟수 + 1
         customer.setBorrowCount(customer.getBorrowCount() + 1);
@@ -96,8 +97,9 @@ public class CustomerServiceImpl implements CustomerService {
         }
         customer.setBorringBooks(booklists);
 
-        // 책 대출 가능으로 변경
+        // 책 대출 가능으로 변경 & 대출 중인 회원 아이디 리스트에서 회원 아이디 제거
         book.setAvailable(true);
+        book.removeBorrowingCusId(id);
 
         return true;
     }

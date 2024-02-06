@@ -16,14 +16,15 @@
 - final int MAX_BOOKNUM = 5 : 1인당 대출 가능 권 수
 
 [Book]
-- bookID (pk): 책 아이디 (pk)
-- bookName : 책 제목
-- author : 책 저자
-- genre : 책 장르
-- available : 대출 가능 여부
-- borrowCount : 대출 횟수 -> 베스트 셀러
-- borrow_date : 대출일
-- return_date : 반납일
+- String bookID (pk): 책 아이디 (pk)
+- String bookName : 책 제목
+- String author : 책 저자
+- String genre : 책 장르
+- boolean available : 대출 가능 여부
+- List<String> borrowingCusId : 대출 중인 회원 아이디
+- int borrowCount : 대출 횟수 -> 베스트 셀러
+- LocalDate borrow_date : 대출일
+- LocalDate return_date : 반납일
 
 
 ## service (인터페이스 & 구현클래스)
@@ -38,27 +39,28 @@
 <pre>
     public Customer search(String id);           // 회원 검색
     public boolean insert(Customer customer);    // 회원 가입
-    public List<Customer> selectAll();      // 회원 리스트 반환
+    public List<Customer> selectAll();           // 회원 리스트 반환
     public boolean update(Customer customer);    // 회원 정보 수정(이름, 비밀번호) 
     public boolean delete(String id);            // 회원 삭제
     public int getCount();                       // 총 회원 수 반환
-    // 도서 관련 함수
-    public Book borrowBook(String id,String bookid);    // 책 대출
-    public boolean returnBook(String id,String bookid);   // 책 반납
-    public int customerBorrowCount(String id); //대출 중인 책 수 반환
-    public Book[] returnBorrowingBooklist(String id); // 현재 대출 중인 책 리스트 반환
-    public boolean isBookidExist(String id, String bookid);  // 현재 대출 중인 책인지 확인
+    // ++++++++++++++++++++++++++ 도서 관련 함수 ++++++++++++++++++++++++++++++++++++
+    public Book borrowBook(String id,String bookid);          // 책 대출
+    public boolean returnBook(String id,String bookid);       // 책 반납
+    public int customerBorrowCount(String id);                // 현재 대출 중인 책 수 반환
+    public Book[] returnBorrowingBooklist(String id);         // 현재 대출 중인 책 리스트 반환
+    public boolean isBookidExist(String id, String bookid);   // 현재 대출 중인 책인지 확인
 
 </pre>
 
 ### Book 인터페이스
 <pre>
-    public Book search(String bookID);       // 도서 검색
-    public boolean addBook(Book book);       // 도서 추가
-    public boolean update(Book book);        // 도서 정보 수정 (저자, 장르)
-    public boolean delete(String bookID);    // 도서 삭제
-    public int getBookCount();               // 도서 수
-    public ArrayList<Book> selectAll();      // 도서 리스트 반환
+    public Book search(String bookID);        // 도서 검색
+    public boolean addBook(Book book);        // 도서 추가
+    public boolean update(Book book);         // 도서 정보 수정 (저자, 장르)
+    public boolean delete(String bookID);     // 도서 삭제
+    public int getBookCount();                // 도서 수
+    public List<Book> selectAll();            // 도서 리스트 반환
+    public boolean possibleBorrow(String id); // 도서 대출 가능 여부 확인
 </pre>
 
 
@@ -75,8 +77,8 @@
         System.out.println("\t4. 회원 정보 검색");
         System.out.println("\t5. 전체 회원 정보");
         System.out.println("\n-----------[도서 관리]-----------");
-        System.out.println("\t6. 도서 정보 입력");
-        System.out.println("\t7. 도서 정보 삭제");
+        System.out.println("\t6. 도서 등록");
+        System.out.println("\t7. 도서 삭제");
         System.out.println("\t8. 도서 정보 수정");
         System.out.println("\n-----------[도서서비스]-----------");
         System.out.println("\t9. 전체 도서 정보");

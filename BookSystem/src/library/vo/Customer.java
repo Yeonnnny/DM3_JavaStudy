@@ -78,7 +78,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "회원 이름 : " + name + " 대출 중 도서 목록 : " + Arrays.toString(borringBooks) + "]";
+        return "아이디 : "+id+", 이름 : "+ name +", [대출 중 도서 목록] " + Arrays.toString(borringBooks) ;
     }
 
 }
