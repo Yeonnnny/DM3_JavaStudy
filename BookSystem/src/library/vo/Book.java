@@ -2,6 +2,7 @@ package BookSystem.src.library.vo;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Book {
@@ -15,8 +16,6 @@ public class Book {
     // 대출 날짜
     private LocalDate borrow_date; // 대출일
     private LocalDate return_date; // 반납일
-    // private int delayDay; // (return_date-현재날짜 <0 )? 연체 : 연체x
-
 
 
     // 생성자
@@ -29,7 +28,7 @@ public class Book {
         this.author = author;
         this.genre = genre;
         this.available = true; // 초기 값 : 대출 가능 -> true
-        this.borrowingCusId = null;
+        this.borrowingCusId = new ArrayList<>();
         this.borrowCount = 0;
         this.borrow_date = LocalDate.now();
         this.return_date = borrow_date.plusDays(14);
@@ -131,8 +130,8 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book [bookID=" + bookID + ", bookName=" + bookName + ", author=" + author + ", genre=" + genre
-                + ", borrow_date=" + borrow_date + ", return_date=" + return_date + ", 남은 반납기한=" + remainigPeriod() + "]";
+        return "책ID : " + bookID + ", 책 제목 : " + bookName + " (" + author + "), 장르 : " + genre
+                + ", 대출날짜:" + borrow_date + ", 예상반납날짜:" + return_date + ", 남은 반납기한:" + remainigPeriod() + "]";
     }
 
 

@@ -8,7 +8,7 @@ import BookSystem.src.library.vo.Customer;
 
 public class BookServiceImpl implements BookService {
     private List<Book> books = new ArrayList<>();
-    CustomerServiceImpl cs = new CustomerServiceImpl();
+    //CustomerServiceImpl cs = new CustomerServiceImpl();
     public final String MANAGER_NUM = "1013";
 
     @Override
@@ -38,7 +38,7 @@ public class BookServiceImpl implements BookService {
         // 책이 대출 중이라면, 찾아서 대출 중인 회원의 Book 리스트에서도 정보 바꿔줌
         if(book.isAvailable()==false){
             String cust_id = book.getBorrowingCusId().get(0);
-            Customer customer = cs.search(cust_id);
+            Customer customer = new CustomerServiceImpl().search(cust_id);
             Book[] booklist = customer.getBorringBooks();
             for(int i=0; i<booklist.length;i++){
                 if(booklist[i].getBookID().equals(book.getBookID())){
@@ -71,7 +71,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public boolean possibleBorrow(String id) {
         Book book = search(id);
-        return book.isAvailable();
+        return book.isAvailable(); // true이면 대출 가능, false이면 대출 불가능
     }
   
 

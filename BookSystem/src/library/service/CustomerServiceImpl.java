@@ -8,7 +8,7 @@ import BookSystem.src.library.vo.Customer;
 
 public class CustomerServiceImpl implements CustomerService {
     private List<Customer> customers = new ArrayList<>();
-    BookServiceImpl bs = new BookServiceImpl();
+    //BookServiceImpl bs = new BookServiceImpl();
 
     @Override
     public Customer search(String id) {
@@ -57,13 +57,23 @@ public class CustomerServiceImpl implements CustomerService {
     // ++++++++++++++ Book 관련 함수 +++++++++++++++++++++++
 
     @Override
-    public Book borrowBook(String id, String bookid) {
+    public Book borrowBook(String id, Book book) {
         Customer customer = search(id);
-        Book book = bs.search(bookid);
-
+        
         // 대출 중인 도서 목록에 추가
         Book[] booklists = customer.getBorringBooks();
-        booklists[customer.getSize()] = book;
+        if (booklists == null) {
+            // 대출 중인 도서가 없는 경우 새 배열을 생성합니다.
+            booklists = new Book[1];
+            booklists[0] = book;
+        }else {
+            // 대출 중인 도서가 있는 경우 배열을 확장하고 새 도서를 추가합니다.
+            Book[] newBooklists = new Book[booklists.length + 1];
+            System.arraycopy(booklists, 0, newBooklists, 0, booklists.length);
+            newBooklists[booklists.length] = book;
+            booklists = newBooklists;
+        }
+
         customer.setBorringBooks(booklists);
 
         // 대출 불가능으로 변경 & 대출 중인 회원 아이디 저장
@@ -80,7 +90,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public boolean returnBook(String id, String bookid) {
         Customer customer = search(id);
-        Book book = bs.search(bookid);
+        Book book = new BookServiceImpl().search(bookid);
 
         // 대출 중인 도서 목록에서 책 아이디가 같은 책 배열의 위치 저장
         int index = -1;

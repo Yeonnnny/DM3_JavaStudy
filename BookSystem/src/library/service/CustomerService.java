@@ -62,7 +62,7 @@ public interface CustomerService {
      * @param bookid
      * @return 대출한 책 객체
      */
-    public Book borrowBook(String id, String bookid);
+    public Book borrowBook(String id, Book book);
 
     /**
      * 회원 id와 반납할 책의 id를 입력 받아 해당 Book의 대출 가능 여부 값을 변경하고,
