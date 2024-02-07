@@ -1,5 +1,5 @@
 package BookSystem.src.library.vo;
-
+ 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -103,17 +103,20 @@ public class Book {
         this.borrowingCusId.remove(borrowingCusId);
     }
     
-    // 기간관련된 변수는 set 불가능
+    // 기간 관련된 변수
     
     public LocalDate getBorrow_date() {
         return borrow_date;
     }
+    
+    public void setBorrow_date(LocalDate borrow_date) {
+        this.borrow_date = borrow_date;
+        this.return_date = this.borrow_date.plusDays(14);  // 반납 날짜는 대출 날짜의 14일 후까지임 -> setReturn_date함수 생성 X
+    }
 
     public LocalDate getReturn_date() {
         return return_date;
-    }
-
-    
+    }    
 
 
     // 일반 메소드
