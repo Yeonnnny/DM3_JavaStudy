@@ -224,6 +224,7 @@ public class LibSystemUI {
             System.out.println("# 번호가 일치하지 않습니다. 메인 메뉴로 돌아갑니다.");
             return;
         }
+        // 존재하지 않는 도서 정보인 경우 메인으로 ..
         String bookID, answer;
         System.out.print("삭제할 책 아이디 : ");
         bookID = scanner.next();
@@ -231,7 +232,12 @@ public class LibSystemUI {
             System.out.println("# 입력한 아이디의 책이 존재하지 않습니다. 메인 메뉴로 돌아갑니다.");
             return;
         }
-        if(bs.)
+        // 현재 대출 중인 책은 삭제 불가능
+        if(!(bs.search(bookID).isAvailable())){ // false인 경우
+            System.out.println("# 현재 대출 중인 책입니다. 도서 삭제가 불가능합니다.");
+            System.out.println("# 메인 메뉴로 돌아갑니다.");
+            return;
+        }
 
         
         System.out.print("정말 삭제하시겠습니까? (y/n) > ");
@@ -241,7 +247,7 @@ public class LibSystemUI {
             return;
         }
         
-        //삭제
+        // 삭제
         boolean result = bs.delete(bookID);
         if(result) System.out.println("# 해당 도서가 삭제되었습니다.");
         
@@ -321,7 +327,7 @@ public class LibSystemUI {
             System.out.println("# 메인 메뉴로 돌아갑니다. ");
             return;
         }
-
+ 
         System.out.print("도서 번호 입력 : ");
         bookId = scanner.next();
         // 등록된 책인지 확인
@@ -331,7 +337,7 @@ public class LibSystemUI {
             return;
         }
         // 대출 가능한 책인지 확인
-        if (!(bs.possibleBorrow(bookId))){
+        if (!(bs.search(bookId).isAvailable())){
             System.out.println("# 대출이 불가능한 책입니다. 메인 메뉴로 돌아갑니다.");
             return;
         }

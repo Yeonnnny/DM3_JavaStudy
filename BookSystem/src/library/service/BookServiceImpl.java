@@ -16,7 +16,7 @@ public class BookServiceImpl implements BookService {
         for (Book book : books) {
             if(book.getBookID().equals(bookID))
                 return book;   
-        }
+        } 
         return null;
     }
 
@@ -68,11 +68,7 @@ public class BookServiceImpl implements BookService {
         return books;
     }
 
-    @Override
-    public boolean possibleBorrow(String id) {
-        Book book = search(id);
-        return book.isAvailable(); // true이면 대출 가능, false이면 대출 불가능
-    }
+    
   
 
 }

@@ -104,7 +104,7 @@ public class CustomerServiceImpl implements CustomerService {
         // 도서 목록에서 제거 후 저장
         for (int i = index; i < booklists.length - 1; i++) {
             booklists[i] = booklists[i + 1];
-        }
+        } 
         customer.setBorringBooks(booklists);
 
         // 책 대출 가능으로 변경 & 대출 중인 회원 아이디 리스트에서 회원 아이디 제거
