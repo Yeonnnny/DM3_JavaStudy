@@ -342,14 +342,14 @@ public class LibSystemUI {
             return;
         }
 
-        System.out.println("# 대출 가능한 책입니다.");
+        // 대출
+        System.out.println("\n# 대출 가능한 책입니다. 아래 반납 날짜와 기한을 확인해주세요.");
         book = cs.borrowBook(id,book);
-        System.out.println("*******************************************");
+        System.out.println();
         System.out.println(book);
-        System.out.println("*******************************************");
+        System.out.println();
         System.out.println("\n# 도서 대출이 성공적으로 완료되었습니다. ");
-        System.out.printf("# 현재 대출 중인 책은 총 (%d/5)권입니다.%n",cs.customerBorrowCount(id));
-
+        System.out.printf("# [%s]님이 현재 대출 중인 책은 총 (%d/5)권입니다.%n",id,cs.customerBorrowCount(id));
 
     }
     

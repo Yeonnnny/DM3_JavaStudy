@@ -1,5 +1,6 @@
 package BookSystem.src.library.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +60,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Book borrowBook(String id, Book book) {
         Customer customer = search(id);
+        //대출 날짜 설정
+        book.setBorrow_date(LocalDate.now());
         
         // 대출 중인 도서 목록에 추가
         Book[] booklists = customer.getBorringBooks();
@@ -86,6 +89,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         return book;
     }
+    
 
     @Override
     public boolean returnBook(String id, String bookid) {

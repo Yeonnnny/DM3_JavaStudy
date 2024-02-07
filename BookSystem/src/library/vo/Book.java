@@ -137,11 +137,20 @@ public class Book {
     @Override
     public String toString() {
 
-        LocalDate borrow_date = (this.borrow_date==null)? LocalDate.parse("00-00-00"):this.borrow_date;
-        LocalDate return_date = (this.return_date==null)? LocalDate.parse("00-00-00"):this.return_date;
-
+        // String borrow_date = (this.borrow_date==null)? "00-00-00":this.borrow_date+"";
+        // String return_date = (this.return_date==null)? "00-00-00":this.return_date+"";
+        // return "책ID : " + bookID + ", 책 제목 : " + bookName + " (" + author + "), 장르 : " + genre
+        //         + ", 대출날짜:" + borrow_date + ", 예상반납날짜:" + return_date + ", 남은 반납기한:" + remainigPeriod() + "]";
+        
+        String str = "책ID : " + bookID + ", 책 제목 : " + bookName + " (" + author + "), 장르 : " + genre+ " ";
+        
+        
+        if(this.available)
+            return str+"[대출 가능]";
+        
         return "책ID : " + bookID + ", 책 제목 : " + bookName + " (" + author + "), 장르 : " + genre
-                + ", 대출날짜:" + borrow_date + ", 예상반납날짜:" + return_date + ", 남은 반납기한:" + remainigPeriod() + "]";
+                + ", [대출중] ( 대출날짜 : " + borrow_date + ", 예상반납날짜 : " + return_date + ", 남은 반납기한 : " + remainigPeriod() + " )";
+        
     }
 
 
