@@ -30,8 +30,8 @@ public class Book {
         this.available = true; // 초기 값 : 대출 가능 -> true
         this.borrowingCusId = new ArrayList<>();
         this.borrowCount = 0;
-        this.borrow_date = LocalDate.now();
-        this.return_date = borrow_date.plusDays(14);
+        this.borrow_date = null;
+        this.return_date = null;
     }
 
     // getter/setter
@@ -128,11 +128,18 @@ public class Book {
      * @return 남은 반납기한
      **/
     public int remainigPeriod() {
-        return Period.between(LocalDate.now(), return_date).getDays();
+        if (return_date==null) {
+            return 0;
+        }
+        return Period.between(LocalDate.now(), this.return_date).getDays();
     }
 
     @Override
     public String toString() {
+
+        LocalDate borrow_date = (this.borrow_date==null)? LocalDate.parse("00-00-00"):this.borrow_date;
+        LocalDate return_date = (this.return_date==null)? LocalDate.parse("00-00-00"):this.return_date;
+
         return "책ID : " + bookID + ", 책 제목 : " + bookName + " (" + author + "), 장르 : " + genre
                 + ", 대출날짜:" + borrow_date + ", 예상반납날짜:" + return_date + ", 남은 반납기한:" + remainigPeriod() + "]";
     }
