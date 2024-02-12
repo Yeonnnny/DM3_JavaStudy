@@ -11,7 +11,6 @@ public class Customer {
     private int borrowCount; // 총 대출 횟수
     private final int MAX_BOOKNUM = 5; // 한 사람당 대출 가능한 책 수
     private List<Book> borrowingBooks = new ArrayList<>(); // 대출한 책 리스트
-    private int size; // 대출 중인 책 수
 
     // 생성자
     public Customer() {
@@ -23,7 +22,6 @@ public class Customer {
         this.name = name;
         this.borrowCount = borrowCount;
         this.borrowingBooks = borrowingBooks;
-        this.size = 0;
     }
 
     // getter/setter
@@ -70,11 +68,10 @@ public class Customer {
 
     public void setBorrowingBooks(List<Book> borrowingBooks) {
         this.borrowingBooks = borrowingBooks;
-        this.size = borrowingBooks.size();
     }
 
     public int getSize() {
-        return size;
+        return borrowingBooks.size();
     }
 
     @Override
