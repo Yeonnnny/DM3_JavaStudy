@@ -8,15 +8,15 @@ import BookSystem.src.library.vo.Customer;
 
 public class BookServiceImpl implements BookService {
     private List<Book> books = new ArrayList<>();
-    //CustomerServiceImpl cs = new CustomerServiceImpl();
+    // CustomerServiceImpl cs = new CustomerServiceImpl();
     public final String MANAGER_NUM = "1013";
 
     @Override
     public Book search(String bookID) {
         for (Book book : books) {
-            if(book.getBookID().equals(bookID))
-                return book;   
-        } 
+            if (book.getBookID().equals(bookID))
+                return book;
+        }
         return null;
     }
 
@@ -36,14 +36,14 @@ public class BookServiceImpl implements BookService {
             }
         }
         // 책이 대출 중이라면, 찾아서 대출 중인 회원의 Book 리스트에서도 정보 바꿔줌
-        if(book.isAvailable()==false){
+        if (book.isAvailable() == false) {
             String cust_id = book.getBorrowingCusId().get(0);
             Customer customer = new CustomerServiceImpl().search(cust_id);
-            Book[] booklist = customer.getBorringBooks();
-            for(int i=0; i<booklist.length;i++){
-                if(booklist[i].getBookID().equals(book.getBookID())){
-                    booklist[i].setAuthor(book.getAuthor());
-                    booklist[i].setGenre(book.getGenre());
+            List<Book> booklist = customer.getBorrowingBooks();
+            for (int i = 0; i < booklist.size(); i++) {
+                if (booklist.get(i).getBookID().equals(book.getBookID())) {
+                    booklist.get(i).setAuthor(book.getAuthor());
+                    booklist.get(i).setGenre(book.getGenre());
                 }
             }
         }
@@ -67,8 +67,5 @@ public class BookServiceImpl implements BookService {
     public List<Book> selectAll() {
         return books;
     }
-
-    
-  
 
 }

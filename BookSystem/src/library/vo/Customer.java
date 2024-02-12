@@ -1,6 +1,7 @@
 package BookSystem.src.library.vo;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Customer {
 
@@ -9,19 +10,19 @@ public class Customer {
     private String name; // 유저 이름
     private int borrowCount; // 총 대출 횟수
     private final int MAX_BOOKNUM = 5; // 한 사람당 대출 가능한 책 수
-    private Book[] borringBooks = new Book[MAX_BOOKNUM]; // 대출한 책 리스트
+    private List<Book> borrowingBooks = new ArrayList<>(); // 대출한 책 리스트
     private int size; // 대출 중인 책 수
 
     // 생성자
     public Customer() {
     }
 
-    public Customer(String id, String pwd, String name, int borrowCount, Book[] borringBooks) {
+    public Customer(String id, String pwd, String name, int borrowCount, List<Book> borrowingBooks) {
         this.id = id;
         this.pwd = pwd;
         this.name = name;
         this.borrowCount = borrowCount;
-        this.borringBooks = borringBooks;
+        this.borrowingBooks = borrowingBooks;
         this.size = 0;
     }
 
@@ -63,13 +64,13 @@ public class Customer {
         return MAX_BOOKNUM;
     }
 
-    public Book[] getBorringBooks() {
-        return borringBooks;
+    public List<Book> getBorrowingBooks() {
+        return borrowingBooks;
     }
 
-    public void setBorringBooks(Book[] borringBooks) {
-        this.borringBooks = borringBooks;
-        this.size = borringBooks.length;
+    public void setBorrowingBooks(List<Book> borrowingBooks) {
+        this.borrowingBooks = borrowingBooks;
+        this.size = borrowingBooks.size();
     }
 
     public int getSize() {
@@ -78,7 +79,8 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "회원ID : "+id+", 이름 : "+ name +", 총 대출 횟수 : "+borrowCount+", \n[대출 중 도서 목록] " + Arrays.toString(borringBooks) ;
+        return "회원ID : " + id + ", 이름 : " + name + ", 총 대출 횟수 : " + borrowCount + ", \n[대출 중 도서 목록] "
+                + this.borrowingBooks;
     }
 
 }

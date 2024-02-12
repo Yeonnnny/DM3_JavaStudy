@@ -148,7 +148,7 @@ public class Book {
         if(this.available)
             return str+"[대출 가능]";
         
-        return "책ID : " + bookID + ", 책 제목 : " + bookName + " (" + author + "), 장르 : " + genre
+        return "도서 번호 : " + bookID + ", 책 제목 : " + bookName + " (" + author + "), 장르 : " + genre
                 + ", [대출중] ( 대출날짜 : " + borrow_date + ", 예상반납날짜 : " + return_date + ", 남은 반납기한 : " + remainigPeriod() + " )";
         
     }
