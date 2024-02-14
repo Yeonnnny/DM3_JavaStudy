@@ -3,6 +3,7 @@
 commit msg -> "yymmdd 일별 커밋수 : 변경 내용"
 
 
+<br/>
 
 ## table
 
@@ -10,6 +11,7 @@ commit msg -> "yymmdd 일별 커밋수 : 변경 내용"
 - sequence 객체명 > products_seq
 
 
+<br/>
 <pre>
 pid number constraints products_id_ pk primary key
 pname  varchar2(100) constraints products_name_nn not null
@@ -19,6 +21,7 @@ category enum ('outer','top','bottom','acc','shoes')
 </pre>
 
 
+<br/>
 
 ## entity > Products.java
 int pId\
@@ -27,18 +30,26 @@ int price\
 int stock\
 Category category  : enum
 
+<br/>
 
 ## util > ConnectionManager.java
 
 
+<br/>
+
 ## service > ProductsService.java
+
+<br/>
 
 - 재고관리 관련 함수  (CRUD)
   - insert : 물품 등록
   - select : 물품 검색
   - update : 입고/출고, 가격 변동 
   - delete : 물품 삭제
+
+<br/>
 <pre>
+
 public Products search(int pid);
 
 public boolean insert(Products products);
@@ -51,6 +62,10 @@ public boolean updatePrice(int pid, int price); // 변경할 가격 전달
 public boolean delete(int pid); 
 </pre>
 
+<br/>
+
 ## ui > ProductsUI.java
+
+<br/>
 
 ## Main.java
