@@ -24,7 +24,7 @@ category enum ('outer','top','bottom','acc','shoes')
 <br/>
 
 ## entity > Products.java
-int pId\
+long pId\
 String pName\
 int price\
 int stock\
