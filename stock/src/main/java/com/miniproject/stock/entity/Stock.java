@@ -19,9 +19,8 @@ import lombok.NoArgsConstructor;
 @ToString
 
 @Entity
-@Table(name="stock") 
 
-public class Product {
+public class Stock {
 
     @SequenceGenerator(    
         name = "stock_seq_gen",
@@ -46,7 +45,7 @@ public class Product {
     @Enumerated (EnumType.STRING)
     private Category category;
 
-    public Product(String pname, int price, int stock, Category category) {
+    public Stock(String pname, int price, int stock, Category category) {
         this.pname = pname;
         this.price = price;
         this.stock = stock;
