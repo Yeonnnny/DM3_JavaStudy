@@ -7,25 +7,27 @@ commit msg -> "yymmdd 일별 커밋수 : 변경 내용"
 
 ## table
 
-- table명 > products
-- sequence 객체명 > products_seq
+- table명 > stock
+- sequence 객체명 > stock_seq
 
 
 <br/>
 <pre>
-pid number constraints products_id_ pk primary key
-pname  varchar2(100) constraints products_name_nn not null
-unit_price number constraints products_price_nn not null
-stock number default 1
-category enum ('outer','top','bottom','acc','shoes')
+create table stock(
+    pid number constraint stock_id_pk primary key
+    ,pname  varchar2(100) constraint stock_name_nn not null
+    ,unit_price number constraint stock_price_nn not null
+    ,pnum number default 1
+    ,category varchar2(10) -- enum 타입
+);
 </pre>
 
 
 <br/>
 
 ## entity > Products.java
-long pId\
-String pName\
+long pid\
+String pname\
 int price\
 int stock\
 Category category  : enum
