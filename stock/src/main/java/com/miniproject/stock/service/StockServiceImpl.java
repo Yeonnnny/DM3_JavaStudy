@@ -37,6 +37,7 @@ public class StockServiceImpl implements StockService{
             tx.begin();
             manager.persist(stock);
             tx.commit();
+            System.out.println(stock);
             result = true;
         } catch (Exception e) {
             tx.rollback();

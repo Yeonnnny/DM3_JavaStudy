@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.miniproject.stock.entity.Category;
 import com.miniproject.stock.entity.Stock;
 import com.miniproject.stock.service.StockServiceImpl;
+import com.miniproject.stock.util.ConnectionManager;
 
 public class StockUI {
     Scanner scanner = new Scanner(System.in);
@@ -24,7 +25,10 @@ public class StockUI {
                 case "4": updateStock(); break;
                 case "5": updatePrice();break;
                 case "6": delete(); break;
-                case "0": System.out.println("## 프로그램을 종료합니다."); return; break;
+                case "0": 
+                    System.out.println("## 프로그램을 종료합니다."); 
+                    ConnectionManager.close();
+                    return; 
                 default: System.out.println("## 올바르지 않은 번호입니다.\n## 번호를 다시 입력해주세요.");break;
                 
             }// end switch
@@ -49,18 +53,17 @@ public class StockUI {
         scanner.nextLine();
         while (true) {
             System.out.print("카테고리(OUTER/TOP/BOTTOM/ACC/SHOES) 입력:");
-            categry = scanner.nextLine();
+            categry = scanner.next();
             try {
                 c = Category.valueOf(categry);
                 break;
             } catch (Exception e) {
-                System.out.println("존재하지 않는 선택지입니다. 다시 입력해주세요");
-                scanner.nextLine();
+                System.out.println("# 존재하지 않는 선택지입니다. 다시 입력해주세요");
             }
         }
 
         Stock stock = new Stock(pname, price, pnum, c);
-
+        System.out.println(stock);
         boolean result =  service.insert(stock);
         if (result) System.out.println("## 물품 등록이 완료되었습니다.");
     }
@@ -71,13 +74,13 @@ public class StockUI {
         long pid;
         String pname,select;
         Stock stock;
-
+        scanner.nextLine(); // 입력 버퍼 비우기
+        
         while (true) {
-            scanner.nextLine(); // 입력 버퍼 비우기
             System.out.print("1.물품번호 2.물품명\n검색수단 선택 > ");
             select = scanner.nextLine();
-    
-            if (select != "1" || select !="2") {
+            
+            if (!(select.equals("1") || select.equals("2"))) {
                 System.out.println("# 올바르지 않은 번호입니다. 올바르게 입력해주세요.");
                 continue;
             }else break;
@@ -99,7 +102,6 @@ public class StockUI {
                 }
                 break;
             case "2":
-                scanner.nextLine(); // 입력 버퍼 비우기
                 System.out.print("# 물품명 입력 : ");
                 pname = scanner.nextLine();
                 stock = service.selectOne(pname);
