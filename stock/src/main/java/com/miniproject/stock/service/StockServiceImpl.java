@@ -12,7 +12,7 @@ public class StockServiceImpl implements StockService{
 
 
     @Override
-    public Stock search(int pid) {
+    public Stock search(long pid) {
         Stock stock =null;
         EntityManager manager = ConnectionManager.getManager();
         EntityTransaction tx = manager.getTransaction();
@@ -58,12 +58,12 @@ public class StockServiceImpl implements StockService{
     }
 
     @Override
-    public boolean updateStock(int pid, int num) {
+    public boolean updateStock(long pid, int num) {
         return false;
     }
 
     @Override
-    public boolean updatePrice(int pid, int price) {
+    public boolean updatePrice(long pid, int price) {
 
 
 
