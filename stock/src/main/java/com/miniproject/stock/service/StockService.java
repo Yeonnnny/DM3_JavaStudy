@@ -8,13 +8,13 @@ public interface StockService {
 
     public Stock search(int pid);
 
-    public boolean insert(Stock product);
+    public boolean insert(Stock stock);
 
     public Stock selectOne(int pid);
     
     public List<Stock> selectAll();
 
-    public boolean updateStock(int pid, int stock); // 입고 시 양수, 출고 시 음수 전달
+    public boolean updateStock(int pid, int num); // 입고 시 양수, 출고 시 음수 전달
     
     public boolean updatePrice(int pid, int price); // 변경할 가격 전달
 
