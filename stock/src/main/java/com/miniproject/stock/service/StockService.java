@@ -28,21 +28,21 @@ public interface StockService {
     public Stock selectOne(String pname);
     
     /**
-     * DB에 존재하는 모든 물품 리스트로 반환하는 함수
+     * DB에 존재하는 모든 물품을 리스트로 반환하는 함수
      * @return 모든 물품 정보
      */
     public List<Stock> selectAll();
 
     /**
-     * 물품명과 변경하고자 하는 수량을 입력받아 물품 정보를 업데이트하는 재고량 수정 함수. 입고 시는 양수로, 출고 시는 음수로 값을 전달. 
+     * 물품명과 변경하고자 하는 수량을 입력받아 물품 정보를 업데이트하는 재고량 수정 함수. 입고 시는 양수로, 출고 시는 음수로 값을 전달받음. 
      * @param pname
-     * @param num
+     * @param pnum
      * @return
      */
-    public boolean updateStock(String pname, int num); // 입고 시 양수, 출고 시 음수 전달
+    public boolean updateNum(String pname, int pnum); // 입고 시 양수, 출고 시 음수 전달
     
     /**
-     * 물품명과 수정하고자 하는 가격을 입력받아 물품 정보 업데이트하는 가격 수정 함수.
+     * 물품명과 수정하고자 하는 가격을 입력받아 물품 정보를 업데이트하는 가격 수정 함수.
      * @param pname
      * @param price
      * @return
