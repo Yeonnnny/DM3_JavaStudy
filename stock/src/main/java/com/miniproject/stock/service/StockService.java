@@ -10,7 +10,7 @@ public interface StockService {
 
     public boolean insert(Stock stock);
 
-    public Stock selectOne(int pid);
+    public Stock selectOne(String pname);
     
     public List<Stock> selectAll();
 
