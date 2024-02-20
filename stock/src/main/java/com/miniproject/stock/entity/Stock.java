@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Setter;
-import lombok.ToString;
+import lombok.ToString; 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 @ToString
 
 @Entity
+@Table(name = "stock")
 
 public class Stock {
 
@@ -39,16 +40,16 @@ public class Stock {
     private int price ;
 
     @Column(name ="pnum")
-    private int stock;
+    private int pnum;
     
-    @Column(name ="category")
+    @Column(name ="product_category")
     @Enumerated (EnumType.STRING)
     private Category category;
 
-    public Stock(String pname, int price, int stock, Category category) {
+    public Stock(String pname, int price, int pnum, Category category) {
         this.pname = pname;
         this.price = price;
-        this.stock = stock;
+        this.pnum = pnum;
         this.category = category;
     }
 }
@@ -57,4 +58,4 @@ public class Stock {
 // ,pname  varchar2(100) constraint stock_name_nn not null
 // ,unit_price number constraint stock_price_nn not null
 // ,pnum number default 1
-// ,category varchar2(10) -- enum 타입
+// ,product_category varchar2(10) default 'ETC'-- enum 타입
