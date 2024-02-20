@@ -13,8 +13,19 @@ public class StockServiceImpl implements StockService{
 
     @Override
     public Stock search(int pid) {
-        
-        return null;
+        Stock stock =null;
+        EntityManager manager = ConnectionManager.getManager();
+        EntityTransaction tx = manager.getTransaction();
+        try {
+            tx.begin();
+            stock = manager.find(Stock.class, pid);
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+        }finally{
+            manager.close();
+        }
+        return stock;
     }
 
     @Override
@@ -29,14 +40,14 @@ public class StockServiceImpl implements StockService{
             result = true;
         } catch (Exception e) {
             tx.rollback();
-        }finally{
+        }finally{ 
             manager.close();
         }
         return result;
     }
 
     @Override
-    public Stock selectOne(int pid) {
+    public Stock selectOne(String pname) {
         
         return null;
     }
