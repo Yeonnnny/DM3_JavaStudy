@@ -10,3 +10,5 @@ create table stock(
 );
 
 create sequence stock_seq;
+
+select * from stock;
