@@ -2,6 +2,8 @@ package com.miniproject.stock.ui;
 
 import java.util.Scanner;
 
+import com.miniproject.stock.entity.Category;
+import com.miniproject.stock.entity.Stock;
 import com.miniproject.stock.service.StockServiceImpl;
 
 public class StockUI {
@@ -31,11 +33,42 @@ public class StockUI {
 
     // 물품 등록 
     private void insert() {
+        System.out.println("\n[물품 등록]");
+        String pname, categry;
+        int price, pnum;
+        Category c;
 
+        scanner.nextLine();
+        System.out.print("물품명 : ");
+        pname = scanner.nextLine();
+        System.out.print("물품 가격 : ");
+        price = scanner.nextInt();
+        System.out.print("물품 개수 : ");
+        pnum = scanner.nextInt();
+        scanner.nextLine();
+        while (true) {
+            System.out.print("카테고리(OUTER/TOP/BOTTOM/ACC/SHOES) 입력:");
+            categry = scanner.nextLine();
+            try {
+                c = Category.valueOf(categry);
+                break;
+            } catch (Exception e) {
+                System.out.println("존재하지 않는 선택지입니다. 다시 입력해주세요");
+                scanner.nextLine();
+            }
+        }
+
+        Stock stock = new Stock(pname, price, pnum, c);
+
+        boolean result =  service.insert(stock);
+        if (result) System.out.println("## 물품 등록이 완료되었습니다.");
     }
 
     // 물품 한 개 검색
     private void selectOne() {
+        System.out.println("\n[물품 검색]");
+        String pname;
+        System.out.print("물품명 입력 :");
         
     }
 
