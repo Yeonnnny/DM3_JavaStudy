@@ -67,9 +67,51 @@ public class StockUI {
     // 물품 한 개 검색
     private void selectOne() {
         System.out.println("\n[물품 검색]");
-        String pname;
-        System.out.print("물품명 입력 :");
-        
+        long pid;
+        String pname,select;
+        Stock stock;
+
+        while (true) {
+            scanner.nextLine(); // 입력 버퍼 비우기
+            System.out.print("1.물품번호 2.물품명\n검색수단 선택 > ");
+            select = scanner.nextLine();
+    
+            if (select != "1" || select !="2") {
+                System.out.println("# 올바르지 않은 번호입니다. 올바르게 입력해주세요.");
+                continue;
+            }else break;
+            
+        } // end while
+
+        switch (select) {
+            case "1":
+                System.out.print("# 물품번호 입력 : ");
+                pid = scanner.nextLong();
+                stock = service.search(pid);
+                if (stock==null){
+                    System.out.printf("# 물품번호 [%d]에 해당하는 물품이 존재하지 않습니다.%n",pid);
+                    return;
+                }else{
+                    System.out.printf("# 물품번호 [%d]에 해당하는 물품의 정보%n",pid);
+                    System.out.println(stock);
+                    System.out.println();
+                }
+                break;
+            case "2":
+                scanner.nextLine(); // 입력 버퍼 비우기
+                System.out.print("# 물품명 입력 : ");
+                pname = scanner.nextLine();
+                stock = service.selectOne(pname);
+                if (stock==null){
+                    System.out.printf("# 물품명 [%s]에 해당하는 물품이 존재하지 않습니다.%n",pname);
+                    return;
+                }else{
+                    System.out.printf("# 물품명 [%s]에 해당하는 물품의 정보%n",pname);
+                    System.out.println(stock);
+                    System.out.println();
+                }
+                break;
+        } // end switch
     }
 
     // 전체 물품 검색
