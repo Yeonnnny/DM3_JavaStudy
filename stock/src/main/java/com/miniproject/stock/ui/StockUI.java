@@ -1,5 +1,6 @@
 package com.miniproject.stock.ui;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.miniproject.stock.entity.Category;
@@ -80,7 +81,7 @@ public class StockUI {
                 System.out.println("# 올바르지 않은 번호입니다. 올바르게 입력해주세요.");
                 continue;
             }else break;
-            
+
         } // end while
 
         switch (select) {
@@ -116,7 +117,22 @@ public class StockUI {
 
     // 전체 물품 검색
     private void selectAll() {
-        
+        System.out.println("\n[물품 전체 보기]");
+        List<Stock> stockList=null;
+
+        stockList =  service.selectAll();
+
+        if(stockList==null){
+            System.out.println("# 등록된 물품이 0개입니다.\n# 메인으로 돌아갑니다.");
+            return;
+        }
+
+        System.out.printf("# 총 %d개의 물품이 존재합니다.%n",stockList.size());
+        System.out.println("==============================================================================");
+        for (Stock stock : stockList) {
+            System.err.println(stock);
+        }
+        System.out.println("==============================================================================");
     }
 
     // 물품 입고 or 출고

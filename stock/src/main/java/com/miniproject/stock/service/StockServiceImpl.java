@@ -7,6 +7,7 @@ import com.miniproject.stock.util.ConnectionManager;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 
 public class StockServiceImpl implements StockService{
 
@@ -19,7 +20,6 @@ public class StockServiceImpl implements StockService{
         try {
             tx.begin();
             stock = manager.find(Stock.class, pid);
-            tx.commit();
         } catch (Exception e) {
             tx.rollback();
         }finally{
@@ -48,22 +48,56 @@ public class StockServiceImpl implements StockService{
 
     @Override
     public Stock selectOne(String pname) {
-        
-        return null;
+        Stock result = null;
+        EntityManager manager = ConnectionManager.getManager();
+        EntityTransaction tx = manager.getTransaction();
+
+        try {
+            tx.begin();
+            String query = "select s from Stock s where s.pname like :pname";
+
+            // TypedQuery<Stock> stock = manager.createQuery(query, Stock.class);
+            // stock.setParameter("pname", pname);
+            // result = stock.getSingleResult();
+
+            result = manager.createQuery(query,Stock.class).setParameter("pname", pname).getSingleResult();
+
+        } catch (Exception e) {
+            tx.rollback();
+        }finally{
+            manager.close();
+        }
+
+        return result;
     }
 
     @Override
     public List<Stock> selectAll(){
-        return null;
+        EntityManager manager = ConnectionManager.getManager();
+        EntityTransaction tx = manager.getTransaction();
+        List<Stock> stockList = null;
+        try {
+            tx.begin();
+            String query = "select s from Stock s";
+
+            TypedQuery<Stock> tq = manager.createQuery(query,Stock.class);
+            stockList = tq.getResultList();
+
+        } catch (Exception e) {
+            tx.rollback();
+        }finally{
+            manager.close();
+        }
+        return stockList;
     }
 
     @Override
-    public boolean updateStock(long pid, int num) {
+    public boolean updateNum(String pname, int num) {
         return false;
     }
 
     @Override
-    public boolean updatePrice(long pid, int price) {
+    public boolean updatePrice(String pname, int price) {
 
 
 
