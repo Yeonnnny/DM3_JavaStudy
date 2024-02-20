@@ -10,7 +10,7 @@ commit msg -> "yymmdd 일별 커밋수 : 변경 내용"
 - table명 > stock
 - sequence 객체명 > stock_seq
 
-
+  
 <br/>
 <pre>
 create table stock(
