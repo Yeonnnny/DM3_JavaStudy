@@ -63,7 +63,6 @@ public class StockUI {
         }
 
         Stock stock = new Stock(pname, price, pnum, c);
-        System.out.println(stock);
         boolean result =  service.insert(stock);
         if (result) System.out.println("## 물품 등록이 완료되었습니다.");
     }

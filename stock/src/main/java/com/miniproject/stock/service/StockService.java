@@ -11,7 +11,7 @@ public interface StockService {
      * @param pid : 물품번호
      * @return stock : 물품번호에 해당하는 물품
      */
-    public Stock search(long pid);
+    public Stock search(Long pid);
 
     /**
      * DB에 물품 등록하는 함수

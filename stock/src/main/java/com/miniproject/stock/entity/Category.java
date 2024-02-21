@@ -1,8 +1,8 @@
 package com.miniproject.stock.entity;
 
 public enum Category {
-    OUTER("아우터"), TOP("상의"), BOTTOM("하의"), ACC("잡화"), SHOES("신발");
-    // 아우터("OUTER"), 상의("TOP"), 하의("BOTTOM"), 잡화("ACC"), 신발("SHOES");
+    ETC("기타"),OUTER("아우터"), TOP("상의"), BOTTOM("하의"), ACC("잡화"), SHOES("신발");
+    // 기타("ETC"),아우터("OUTER"), 상의("TOP"), 하의("BOTTOM"), 잡화("ACC"), 신발("SHOES");
 
     private String category;
 
@@ -10,7 +10,7 @@ public enum Category {
         this.category = category;
     }
 
-    public String geCategory(){
+    public String getCategory(){
         return this.category;
     }
 

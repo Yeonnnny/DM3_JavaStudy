@@ -18,21 +18,18 @@ import lombok.ToString;
 @Getter
 @ToString
 
-
 @Entity
-@Table(name = "stock")
-
 public class Stock {
 
+    @Id
     @SequenceGenerator(    
         name = "stock_seq_gen",
         sequenceName = "stock_seq",
         initialValue = 1,
         allocationSize = 1
     )
-    @Id
     @GeneratedValue(generator = "stock_seq_gen")
-    private long pid;
+    private Long pid;
     
     @Column(name="pname", nullable = false)
     private String pname;
@@ -48,6 +45,7 @@ public class Stock {
     private Category category;
 
     public Stock(String pname, int price, int pnum, Category category) {
+        super();
         this.pname = pname;
         this.price = price;
         this.pnum = pnum;
@@ -59,4 +57,4 @@ public class Stock {
 // ,pname  varchar2(100) constraint stock_name_nn not null
 // ,unit_price number constraint stock_price_nn not null
 // ,pnum number default 1
-// ,product_category varchar2(10) default 'ETC'-- enum 타입
+// ,product_category varchar2(10)-- enum 타입

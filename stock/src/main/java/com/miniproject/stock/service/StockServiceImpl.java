@@ -13,8 +13,8 @@ public class StockServiceImpl implements StockService{
 
 
     @Override
-    public Stock search(long pid) {
-        Stock stock =null;
+    public Stock search(Long pid) {
+        Stock stock = null;
         EntityManager manager = ConnectionManager.getManager();
         EntityTransaction tx = manager.getTransaction();
         try {
@@ -37,10 +37,11 @@ public class StockServiceImpl implements StockService{
             tx.begin();
             manager.persist(stock);
             tx.commit();
-            System.out.println(stock);
+            System.out.println("저장 완료");
             result = true;
         } catch (Exception e) {
             tx.rollback();
+            System.out.println("-------등록 안됨-----");
         }finally{ 
             manager.close();
         }
