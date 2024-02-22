@@ -1,6 +1,6 @@
 package com.miniproject.stock.ui;
 
-import java.util.List;
+import java.util.List; 
 import java.util.Scanner;
 
 import com.miniproject.stock.entity.Category;
@@ -52,13 +52,13 @@ public class StockUI {
         pnum = scanner.nextInt();
         scanner.nextLine();
         while (true) {
-            System.out.print("카테고리(OUTER/TOP/BOTTOM/ACC/SHOES) 입력:");
+            System.out.print("카테고리 (OUTER/TOP/BOTTOM/ACC/SHOES) 입력 (Only 대문자) : ");
             categry = scanner.next();
             try {
                 c = Category.valueOf(categry);
                 break;
             } catch (Exception e) {
-                System.out.println("# 존재하지 않는 선택지입니다. 다시 입력해주세요");
+                System.out.println("# 존재하지 않는 선택지입니다. 정확하게 입력해주세요");
             }
         }
 
@@ -129,23 +129,91 @@ public class StockUI {
         }
 
         System.out.printf("# 총 %d개의 물품이 존재합니다.%n",stockList.size());
-        System.out.println("==============================================================================");
+        System.out.println("=====================================================================================");
         for (Stock stock : stockList) {
             System.err.println(stock);
         }
-        System.out.println("==============================================================================");
+        System.out.println("=====================================================================================");
     }
-
+    
     // 물품 입고 or 출고
     private void updateStock() {
+        System.out.println("\n[물품 입고 / 출고]");
+        Long pid;
+        String select;
+        int pnum;
+        boolean result;
         
+        System.out.print("물품번호 입력 > ");
+        pid = scanner.nextLong();
+        Stock stock = service.search(pid);
+        if(stock==null){
+            System.out.println("# 해당 번호로 등록된 물품이 없습니다.");
+            return;
+        }
+        
+        System.out.println("\n현재 물품 상태");
+        System.out.println("=====================================================================================");
+        System.out.println(stock);
+        System.out.println("=====================================================================================\n");
+        
+        int cur_pnum = stock.getPnum();
+        
+        while (true) {
+            scanner.nextLine();
+            System.out.print("1.입고  2.출고 > ");
+            select = scanner.nextLine();
+            if(!(select.equals("1") || select.equals("2"))){
+                System.out.println("# 다시 선택해주세요");
+            }else break;
+            
+        }
+        
+        switch (select) {
+            case "1":
+                System.out.print("입고 수량 : ");
+                pnum = scanner.nextInt();
+                result = service.updateNum(stock, pnum);
+                if (result) System.out.printf("# 입고 전 : %d개, 입고 후 : %d개\n# 정상 입고되었습니다.%n",cur_pnum,cur_pnum+pnum);
+                break;
+            case "2":
+                System.out.print("출고 수량 : ");
+                pnum = scanner.nextInt();
+                result = service.updateNum(stock, pnum*(-1));
+                if (result) System.out.printf("# 출고 전 : %d개, 출고 후 : %d개\n# 정상 출고되었습니다.%n",cur_pnum,cur_pnum-pnum);               
+                break;
+        }
     }
-
+    
     // 물품 가격 변경
     private void updatePrice() {
+        System.out.println("\n[물품 가격 변경]");
+        Long pid;
+        int price;
+        boolean result;
         
-    }
+        System.out.print("물품번호 입력 > ");
+        pid = scanner.nextLong();
+        Stock stock = service.search(pid);
+        if(stock==null){
+            System.out.println("# 해당 번호로 등록된 물품이 없습니다.");
+            return;
+        }
+        
+        System.out.println("\n현재 물품 상태");
+        System.out.println("=====================================================================================");
+        System.out.println(stock);
+        System.out.println("=====================================================================================\n");
+        
+        int cur_price = stock.getPrice();
 
+        System.out.print("변경할 가격 : ");
+        price = scanner.nextInt();
+        result = service.updatePrice(stock, price);
+        if(result) System.out.printf("# 변경 전 : %,d원, 변경 후 : %,d원\n# 변경 완료되었습니다.%n",cur_price,price);
+    
+    }
+    
     // 물품 삭제
     private void delete() {
         

@@ -81,10 +81,10 @@ public class StockServiceImpl implements StockService{
         try {
             tx.begin();
             String query = "select s from Stock s";
-
+            
             TypedQuery<Stock> tq = manager.createQuery(query,Stock.class);
             stockList = tq.getResultList();
-
+            
         } catch (Exception e) {
             tx.rollback();
         }finally{
@@ -92,19 +92,49 @@ public class StockServiceImpl implements StockService{
         }
         return stockList;
     }
-
+    
     @Override
-    public boolean updateNum(String pname, int num) {
-        return false;
+    public boolean updateNum(Stock stock, int num) {
+        boolean result;
+        Long pid = stock.getPid();
+        int cur_pnum = stock.getPnum(); 
+        
+        EntityManager manager = ConnectionManager.getManager();
+        EntityTransaction tx = manager.getTransaction();
+        try {
+            tx.begin();
+            Stock target = manager.find(Stock.class, pid);
+            target.setPnum(cur_pnum+num);
+            tx.commit();
+            result = true;
+        } catch (Exception e) {
+            tx.rollback();
+            result=false;
+        }finally{
+            manager.close();
+        }
+        return result;
     }
-
+    
     @Override
-    public boolean updatePrice(String pname, int price) {
-
-
-
-
-        return false;
+    public boolean updatePrice(Stock stock, int price) {
+        boolean result;
+        Long pid = stock.getPid();
+        EntityManager manager = ConnectionManager.getManager();
+        EntityTransaction tx = manager.getTransaction();
+        try {
+            tx.begin();
+            Stock target = manager.find(Stock.class, pid);
+            target.setPrice(price);
+            tx.commit();
+            result = true;
+        } catch (Exception e) {
+            tx.rollback();
+            result=false;
+        }finally{
+            manager.close();
+        }
+        return result;
     }
     
 }
