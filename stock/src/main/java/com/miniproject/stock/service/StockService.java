@@ -34,19 +34,19 @@ public interface StockService {
     public List<Stock> selectAll();
 
     /**
-     * 물품명과 변경하고자 하는 수량을 입력받아 물품 정보를 업데이트하는 재고량 수정 함수. 입고 시는 양수로, 출고 시는 음수로 값을 전달받음. 
-     * @param pname
+     * 물품객체와 변경하고자 하는 수량을 입력받아 물품 정보를 업데이트하는 재고량 수정 함수. 입고 시는 양수로, 출고 시는 음수로 값을 전달받음. 
+     * @param stock
      * @param pnum
      * @return
      */
-    public boolean updateNum(String pname, int pnum); // 입고 시 양수, 출고 시 음수 전달
+    public boolean updateNum(Stock stock, int pnum); // 입고 시 양수, 출고 시 음수 전달
     
     /**
-     * 물품명과 수정하고자 하는 가격을 입력받아 물품 정보를 업데이트하는 가격 수정 함수.
-     * @param pname
+     * 물품객체와 수정하고자 하는 가격을 입력받아 물품 정보를 업데이트하는 가격 수정 함수.
+     * @param stock
      * @param price
      * @return
      */
-    public boolean updatePrice(String pname, int price); // 변경할 가격 전달
+    public boolean updatePrice(Stock stock, int price); // 변경할 가격 전달
 
 }
