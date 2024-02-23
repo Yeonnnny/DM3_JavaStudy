@@ -132,26 +132,7 @@ public class StockServiceImpl implements StockService{
         return result;
     }
     
-    @Override
-    public boolean delete(Stock stock){
-        boolean result=false;
-        EntityManager manager = ConnectionManager.getManager();
-        EntityTransaction tx = manager.getTransaction();
-        System.out.println(stock);
-        try {
-            tx.begin();
-            manager.remove(stock);
-            tx.commit();
-            result=true;
-        } catch (Exception e) {
-            tx.rollback();
-        }finally{
-            manager.close();
-        }
-        
-        return result;
-    }
-    
+
     @Override
     public boolean delete(Long pid){
         boolean result=false;

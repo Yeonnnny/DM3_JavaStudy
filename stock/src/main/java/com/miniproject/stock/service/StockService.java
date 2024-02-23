@@ -51,11 +51,10 @@ public interface StockService {
 
 
     /**
-     * 물품 객체를 입력받아 해당하는 물품 데이터를 삭제하는 함수
-     * @param stock
+     * 물품 번호를 입력받아 해당하는 물품 데이터를 삭제하는 함수
+     * @param pid
      * @return
      */
-    public boolean delete(Stock stock); 
     public boolean delete(Long pid); 
 
 }
