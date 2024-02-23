@@ -94,17 +94,14 @@ public class StockServiceImpl implements StockService{
     }
     
     @Override
-    public boolean updateNum(Stock stock, int num) {
-        boolean result;
-        Long pid = stock.getPid();
-        int cur_pnum = stock.getPnum(); 
-        
+    public boolean updateNum(Long pid, int num) {
+        boolean result;        
         EntityManager manager = ConnectionManager.getManager();
         EntityTransaction tx = manager.getTransaction();
         try {
             tx.begin();
             Stock target = manager.find(Stock.class, pid);
-            target.setPnum(cur_pnum+num);
+            target.setPnum(target.getPnum()+num);
             tx.commit();
             result = true;
         } catch (Exception e) {
@@ -117,9 +114,8 @@ public class StockServiceImpl implements StockService{
     }
     
     @Override
-    public boolean updatePrice(Stock stock, int price) {
-        boolean result;
-        Long pid = stock.getPid();
+    public boolean updatePrice(Long pid, int price) {
+        boolean result=false;
         EntityManager manager = ConnectionManager.getManager();
         EntityTransaction tx = manager.getTransaction();
         try {
@@ -130,11 +126,51 @@ public class StockServiceImpl implements StockService{
             result = true;
         } catch (Exception e) {
             tx.rollback();
-            result=false;
         }finally{
             manager.close();
         }
         return result;
     }
     
+    @Override
+    public boolean delete(Stock stock){
+        boolean result=false;
+        EntityManager manager = ConnectionManager.getManager();
+        EntityTransaction tx = manager.getTransaction();
+        System.out.println(stock);
+        try {
+            tx.begin();
+            manager.remove(stock);
+            tx.commit();
+            result=true;
+        } catch (Exception e) {
+            tx.rollback();
+        }finally{
+            manager.close();
+        }
+        
+        return result;
+    }
+    
+    @Override
+    public boolean delete(Long pid){
+        boolean result=false;
+        EntityManager manager = ConnectionManager.getManager();
+        EntityTransaction tx = manager.getTransaction();
+        try {
+            tx.begin();
+
+            Stock stock = manager.find(Stock.class, pid);
+            manager.remove(stock);
+            tx.commit();
+            result=true;
+        } catch (Exception e) {
+            tx.rollback();
+        }finally{
+            manager.close();
+        }
+        
+        return result;
+        
+    }    
 }

@@ -173,13 +173,13 @@ public class StockUI {
             case "1":
                 System.out.print("입고 수량 : ");
                 pnum = scanner.nextInt();
-                result = service.updateNum(stock, pnum);
+                result = service.updateNum(pid, pnum);
                 if (result) System.out.printf("# 입고 전 : %d개, 입고 후 : %d개\n# 정상 입고되었습니다.%n",cur_pnum,cur_pnum+pnum);
                 break;
             case "2":
                 System.out.print("출고 수량 : ");
                 pnum = scanner.nextInt();
-                result = service.updateNum(stock, pnum*(-1));
+                result = service.updateNum(pid, pnum*(-1));
                 if (result) System.out.printf("# 출고 전 : %d개, 출고 후 : %d개\n# 정상 출고되었습니다.%n",cur_pnum,cur_pnum-pnum);               
                 break;
         }
@@ -206,17 +206,46 @@ public class StockUI {
         System.out.println("=====================================================================================\n");
         
         int cur_price = stock.getPrice();
-
+        
         System.out.print("변경할 가격 : ");
         price = scanner.nextInt();
-        result = service.updatePrice(stock, price);
+        result = service.updatePrice(pid, price);
         if(result) System.out.printf("# 변경 전 : %,d원, 변경 후 : %,d원\n# 변경 완료되었습니다.%n",cur_price,price);
-    
+        
     }
     
     // 물품 삭제
     private void delete() {
+        System.out.println("\n[물품 삭제]");
+        Long pid;
+        String answer ;
+        boolean result;
+
+        System.out.print("물품번호 입력 > ");
+        pid = scanner.nextLong();
+        Stock stock = service.search(pid);
+        if(stock==null){
+            System.out.println("# 해당 번호로 등록된 물품이 없습니다.");
+            return;
+        }
         
+        System.out.println("\n현재 물품 상태");
+        System.out.println("=====================================================================================");
+        System.out.println(stock);
+        System.out.println("=====================================================================================\n");
+        
+        while (true) {
+            System.out.print("# 정말 삭제하시겠습니까? (y/n) : ");
+            answer = scanner.next();
+            if (answer.equalsIgnoreCase("Y") || answer.equalsIgnoreCase("N")) {
+                break;
+            }
+            System.out.println("# 다시 입력해주세요. ");
+        }
+
+        // result = service.delete(stock); // Why?
+        result = service.delete(pid);
+        if (result) System.out.println("# 삭제가 완료되었습니다. ");
     }
 
 

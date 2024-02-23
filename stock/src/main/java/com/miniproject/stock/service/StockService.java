@@ -39,7 +39,7 @@ public interface StockService {
      * @param pnum
      * @return
      */
-    public boolean updateNum(Stock stock, int pnum); // 입고 시 양수, 출고 시 음수 전달
+    public boolean updateNum(Long pid, int pnum); // 입고 시 양수, 출고 시 음수 전달
     
     /**
      * 물품객체와 수정하고자 하는 가격을 입력받아 물품 정보를 업데이트하는 가격 수정 함수.
@@ -47,6 +47,15 @@ public interface StockService {
      * @param price
      * @return
      */
-    public boolean updatePrice(Stock stock, int price); // 변경할 가격 전달
+    public boolean updatePrice(Long pid, int price); // 변경할 가격 전달
+
+
+    /**
+     * 물품 객체를 입력받아 해당하는 물품 데이터를 삭제하는 함수
+     * @param stock
+     * @return
+     */
+    public boolean delete(Stock stock); 
+    public boolean delete(Long pid); 
 
 }
