@@ -3,7 +3,9 @@
 commit msg -> "yymmdd 일별 커밋수 : 변경 내용"
 
 
-<br/>
+<br>
+ 
+# Backend
 
 ## table
 
@@ -11,7 +13,7 @@ commit msg -> "yymmdd 일별 커밋수 : 변경 내용"
 - sequence 객체명 > stock_seq
 
   
-<br/>
+<br>
 <pre>
 create table stock(
     pid number constraint stock_id_pk primary key
@@ -23,7 +25,7 @@ create table stock(
 </pre>
 
 
-<br/>
+<br>
 
 ## entity > Stock.java
 long pid\
@@ -32,12 +34,12 @@ int price\
 int stock\
 Category category  : enum
 
-<br/>
+<br>
 
 ## util > ConnectionManager.java
 
 
-<br/>
+<br>
 
 ## ui > StockUI.java
 <pre>
@@ -57,7 +59,7 @@ Category category  : enum
 </pre>
 
 
-<br/>
+<br>
 
 ## service > StockService.java
 
@@ -72,24 +74,33 @@ Category category  : enum
 <br/>
 <pre>
 
-public Products search(int pid);
+public Products search(Long pid);
 
-public boolean insert(Products products);
+public boolean insert(Stock stock);
 
-public Products selectOne(int pid);
+public Products selectOne(String pname);
 
 public List<Product> selectAll();
 
 // 입고 시 양수, 출고 시 음수 전달
-public boolean updateStock(int pid, int stock); 
+public boolean updateStock(Long pid, int pnum); 
 
 // 변경할 가격 전달
-public boolean updatePrice(int pid, int price); 
+public boolean updatePrice(Long pid, int pric); 
 
-public boolean delete(int pid); 
+public boolean delete(Long pid); 
 </pre>
 
 
 <br/>
 
 ## Main.java
+
+
+
+# Frontend
+
+## stock.html
+## stock.css
+## stock.js
+
