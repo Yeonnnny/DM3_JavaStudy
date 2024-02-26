@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재고관리시스템</title>
+
+    <script defer src="./stock.js"></script>
+
+    <link rel="stylesheet" href="./stock.css">
+
+    <!--font-family: "Montserrat", sans-serif-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!--font-family: "Nanum Gothic Coding", monospace;-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="wrapper">
+
+        <h2>[물품 등록]</h2>
+
+        <ol>
+            <form action="" id="inputForm">
+                <li><span>물품명</span>  <input type="text" id="pname" placeholder="물품명 입력"></li>
+                <li><span>물품 가격</span>  <input type="number" id="price" min="0" placeholder="원"></li>
+                <li><span>물품 개수</span> <input type="number" id="pnum" min="0" placeholder="개"></li>
+                <li><span>카테고리</span> 
+                    <fieldset>
+                        <legend>Category</legend>
+                        <input type="radio" name="category" value="OUTER"> OUTER
+                        <input type="radio" name="category" value="TOP"> TOP
+                        <input type="radio" name="category" value="BOTTOM"> BOTTOM
+                        <input type="radio" name="category" value="ACC"> ACC
+                        <input type="radio" name="category" value="SHOES"> SHOES
+                    </fieldset>
+                </li>
+            </form>
+        </ol>
+
+        <button id="register">등록</button>
+
+    </div>
+
+
+
+
+    
+</body>
+</html>

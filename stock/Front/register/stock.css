@@ -1,0 +1,66 @@
+.wrapper{
+    width: 850px;
+    margin: 0 auto;
+    font-family: "Nanum Gothic Coding", monospace;
+}
+
+.wrapper>h2{
+    text-align: center;
+    margin: 15px;
+    padding: 12px;
+    background-color: rgb(70, 65, 65);
+    font-size: 1.7em;
+    color: white;
+}
+
+.wrapper>ol{
+    margin-left: 8%;
+}
+
+.wrapper li{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.wrapper li>span{
+    font-weight: bolder;
+    font-size: 1.2em;
+}
+
+
+.wrapper li>input{
+    display: block;
+    width: 650px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.wrapper li>fieldset{
+    width: 650px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.wrapper>button{
+    display: inline-block;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 7px 50px;
+    margin-left: 42.5%;
+    border-radius: 20px;
+    border: 0;
+    background-color: rgb(110, 98, 98);
+    color: white;
+}
+
+.wrapper>button:hover{
+    box-shadow: 3px 5px 3px grey;
+    font-size: 20px;
+}
+
+.wrapper>button:active{
+    margin-left: 42.6%;
+    margin-top: 1.5px;
+    box-shadow: none;
+}
