@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Todolist</title>
+
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nanum+Gothic&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style/listPage.css">
+
+</head>
+
+<body>
+    <div class="top">
+        <div class="home">
+            <a th:href="@{/}">
+                <img th:src="@{/img/home_.png}" alt="홈">
+            </a>
+        </div>
+        <h2> <span th:text="${userName}"></span>님의 To Do list</h2>
+        <!--현재 날짜 및 시간-->
+        <h3 id="datetime"></h3>
+    </div>
+
+
+    <ul id="putHere">
+        <li class="list">
+            <input type="checkbox" name="todo" id="todo" class="todoCheck">
+            <label for="todo">
+                <input type="text" placeholder="할 일 입력">
+            </label>
+            <img th:src="@{/img/delete.png}" class="delbtn" alt="삭제">
+        </li>
+    </ul>
+
+    <div id="plusbtn">
+        <img th:src="@{/img/plus.png}" alt="추가">
+    </div>
+
+
+    <script th:inline="javascript">
+
+        //현재 시간 및 날짜 표시
+
+        let yoils = ["일", "월", "화", "수", "목", "금", "토"];
+
+        // 화면 바뀌자 마자 바로 출력하기 위해 일단 한 번 출력
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = parseInt(date.getMonth()) + 1;
+        let day = date.getDate();
+        let yoil = parseInt(date.getDay());
+        let hour = ('0' + date.getHours()).slice(-2);
+        let min = ('0' + date.getMinutes()).slice(-2);
+        let sec = ('0' + date.getSeconds()).slice(-2);
+
+        let str = `${year}년 ${month}월 ${day}일 ${yoils[yoil]}요일 ${hour}:${min}:${sec}`;
+        document.getElementById("datetime").innerHTML = str;
+
+        // 1초마다 시간 업데이트
+        setInterval(setTime, 1000);
+
+        function setTime() {
+            let date = new Date();
+            let year = date.getFullYear();
+            let month = parseInt(date.getMonth()) + 1;
+            let day = date.getDate();
+            let yoil = parseInt(date.getDay());
+            let hour = ('0' + date.getHours()).slice(-2);
+            let min = ('0' + date.getMinutes()).slice(-2);
+            let sec = ('0' + date.getSeconds()).slice(-2);
+
+            let str = `${year}년 ${month}월 ${day}일 ${yoils[yoil]}요일 ${hour}:${min}:${sec}`;
+            document.getElementById("datetime").innerHTML = str;
+        }
+
+
+        // checkbox 상태가 checked인 경우 줄긋기
+        let checkBox = document.getElementsByClassName("todoCheck")
+
+        for (let i = 0; i < checkBox.length; i++) {
+            checkBox[i].addEventListener("click", isChecked);
+        }
+
+        function isChecked() {
+
+            let content = this.nextElementSibling.querySelector('input[type="text"]');
+
+            if (content.value.trim().length != 0) {
+                if (this.checked) {
+                    content.style.textDecoration = "line-through";
+                }
+                else {
+                    content.style.textDecoration = "none";
+                }
+            }
+        }
+
+
+        // 리스트 삭제
+        let delbtn = document.getElementsByClassName("delbtn");
+
+        for (let i = 0; i < delbtn.length; i++) {
+            delbtn[i].addEventListener("click", deleteList);
+        }
+
+        function deleteList() {
+            let target = this.closest("li");
+            console.log(target);
+            document.getElementById("putHere").removeChild(target);
+        }
+
+
+        // 리스트 추가
+        document.getElementById("plusbtn").addEventListener("click", plusList);
+
+        function plusList() {
+            //새로운 li 요소 생성
+            let newListItem = document.createElement("li");
+            newListItem.classList.add("list"); // class 속성 추가
+            newListItem.innerHTML = `<input type="checkbox" name="todo" id="todo" class="todoCheck">
+                                    <label for="todo">
+                                        <input type="text" placeholder="할 일 입력">
+                                    </label>
+                                    <img src="img/delete.png" class="delbtn" alt="삭제">`;
+
+            //삭제 버튼에 이벤트 리스너 추가 
+            newListItem.querySelector(".delbtn").addEventListener("click", deleteList);
+
+            //체크박스 이벤트 리스너 추가
+            newListItem.querySelector(".todoCheck").addEventListener("click", isChecked);
+
+            // ul 요소에 새로운 li 요소 추가
+            document.getElementById("putHere").appendChild(newListItem);
+        }
+
+    </script>
+
+</body>
+
+
+
+</html>

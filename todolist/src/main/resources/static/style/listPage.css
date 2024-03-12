@@ -1,0 +1,99 @@
+/* 글씨체 */
+.nanum-gothic-regular {
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    font-family: "Nanum Gothic", sans-serif;
+}
+
+
+/* 상단 */
+.top {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.top>.home>img {
+    width: 25px;
+}
+
+.top>h2 {
+    font-size: 50px;
+}
+
+.top>h3 {
+    padding-bottom: 10px;
+}
+
+/* 리스트  */
+ul {
+    padding-left: 420px;
+}
+
+ul>li {
+    list-style: none;
+}
+
+ul>li {
+    border: 2.5px solid grey;
+    border-radius: 10px;
+    width: 675px;
+    height: 40px;
+    margin: 10px;
+    margin-bottom: 14px;
+}
+
+ul>li>#todo {
+    margin-left: 14px;
+    margin-top: 10px;
+}
+
+ul>li input[type="text"] {
+    /* display: block; */
+    width: 590px;
+    height: 26px;
+    margin-bottom: 5px;
+    border: 0;
+    border-bottom: 1px solid grey;
+}
+
+/* delete버튼 */
+ul>li img {
+    vertical-align: middle;
+    width: 23px;
+    padding-left: 4px;
+}
+
+ul>li img:hover {
+    cursor: pointer;
+    width: 25px;
+    /* box-shadow: 2px 2px gray; */
+}
+
+
+
+
+/* 추가 버튼 */
+
+#plusbtn {
+    width: 500px;
+    height: 28px;
+    background-color: rgb(190, 188, 188);
+    border-radius: 9px;
+    margin-left: 507.5px;
+}
+
+#plusbtn>img {
+    width: 25px;
+    padding-left: 237.5px;
+    padding-bottom: 1px;
+    text-align: center;
+}
+
+#plusbtn:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 2px gray;
+}
