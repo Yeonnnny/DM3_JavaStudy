@@ -7,7 +7,86 @@
 </head>
 <body>
 
-    <h2> [ 영화 ] </h2>
+    <div class="container">
+        <div class="head">
+            <a th:href="@{/}">
+                <img th:src="@{img/movie.png}" alt="홈으로">
+            </a>
+            <h2>♥ Movie Lover ♥</h2>
+
+        </div>
+
+        <div class="gnb">
+            <a href="">회원가입</a>
+            <a href="">로그인</a>
+            <a href="">로그아웃</a>
+            <div class="searchBox">
+                <select name="search" id="selectCategory">
+                    <option name="search" value="영화제목"> 영화제목</option>
+                    <option name="search" value="감독명"> 감독명</option>
+                    <option name="search" value="장르"> 장르</option>
+                </select>
+                <input type="text" id="searchText">
+                <img th:src="@{img/search.png}" alt="검색">
+            </div>
+
+        </div>
+
+        <div class="content">
+            <div class="movie_group">
+                <ul>
+                    <!-- 반복문 사용하는게 좋을 듯..? -->
+                    <li>
+                        <a th:href="@{/movie/movieDetail}">
+                            <div class="poster_img"></div>
+                            <div class="poster_info"></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="pagination">
+                <li>
+                    <button type="button" class="pageIndicator">
+                        <span class="blind">이전</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button">
+                        <span class="blind">0</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button">
+                        <span class="blind">1</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button">
+                        <span class="blind">2</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button">
+                        <span class="blind">3</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button">
+                        <span class="blind">4</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="pageIndicator">
+                        <span class="blind">다음</span>
+                    </button>
+                </li>
+            </ul>
+            
+                
+        </div>
+
+    </div>
     
 </body>
 </html>

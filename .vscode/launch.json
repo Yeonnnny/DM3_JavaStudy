@@ -9,6 +9,16 @@
             "projectName": "todolist",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MovieApplication<movie>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.javastudy.movie.MovieApplication",
+            "projectName": "movie",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
