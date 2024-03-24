@@ -39,7 +39,7 @@ create table review (
     movie_num number references movie(movie_num) on delete cascade,
     mem_num number references mem(mem_num) on delete cascade,
     review_text varchar2(1000) not null,
-    grade number not null,
+    grade number(3,1) not null,
     write_date date default sysdate
 );
 
