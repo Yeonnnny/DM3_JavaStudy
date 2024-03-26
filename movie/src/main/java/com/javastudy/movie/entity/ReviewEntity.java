@@ -3,7 +3,6 @@ package com.javastudy.movie.entity;
 import java.time.LocalDateTime;
 
 import com.javastudy.movie.dto.ReviewDTO;
-import com.javastudy.movie.dto.ReviewDTO.ReviewDTOBuilder;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,20 +44,20 @@ public class ReviewEntity {
 
     // FK
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "movie_num")
-    private MovieEntity movieEntity;
+    @JoinColumn(name = "film_num")
+    private FilmEntity filmEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mem_num")
     private MemEntity memEntity;
 
-    public static ReviewEntity toEntity(ReviewDTO reviewDTO, MovieEntity movieEntity, MemEntity memEntity) {
+    public static ReviewEntity toEntity(ReviewDTO reviewDTO, FilmEntity filmEntity, MemEntity memEntity) {
         return ReviewEntity.builder()
                 .reviewNum(reviewDTO.getReviewNum())
                 .reviewText(reviewDTO.getReviewText())
                 .grade(reviewDTO.getGrade())
                 .writeDate(reviewDTO.getWriteDate())
-                .movieEntity(movieEntity)
+                .filmEntity(filmEntity)
                 .memEntity(memEntity)
                 .build();
     }

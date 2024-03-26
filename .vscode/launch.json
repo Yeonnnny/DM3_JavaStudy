@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Crawling",
+            "request": "launch",
+            "mainClass": "com.javastudy.movie.crawling.Crawling",
+            "projectName": "movie"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-TodolistApplication<todolist>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
