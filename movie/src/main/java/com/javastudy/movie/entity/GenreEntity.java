@@ -7,10 +7,12 @@ import com.javastudy.movie.dto.GenreDTO;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +26,8 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
+@Entity
+@Table(name = "genre")
 public class GenreEntity {
     @Id
     @Column(name = "genre_attr")

@@ -26,6 +26,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
+
 @Entity
 @Table(name = "review")
 public class ReviewEntity {
@@ -48,13 +49,13 @@ public class ReviewEntity {
     private FilmEntity filmEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mem_num")
+    @JoinColumn(name = "mem_id")
     private MemEntity memEntity;
 
     public static ReviewEntity toEntity(ReviewDTO reviewDTO, FilmEntity filmEntity, MemEntity memEntity) {
         return ReviewEntity.builder()
                 .reviewNum(reviewDTO.getReviewNum())
-                .reviewText(reviewDTO.getReviewText())
+                .reviewText(reviewDTO.getReviewText())  
                 .grade(reviewDTO.getGrade())
                 .writeDate(reviewDTO.getWriteDate())
                 .filmEntity(filmEntity)

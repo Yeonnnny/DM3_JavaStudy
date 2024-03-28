@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javastudy.movie.dto.MemDTO;
-import com.javastudy.movie.dto.ReviewDTO;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -40,7 +39,7 @@ public class MemEntity {
     // 자식 테이블
     @OneToMany(mappedBy = "memEntity", cascade = CascadeType.REMOVE, orphanRemoval = true,fetch = FetchType.LAZY)
     @OrderBy("review_num")
-    List<ReviewDTO> reviewEntity = new ArrayList<>();
+    List<ReviewEntity> reviewEntity = new ArrayList<>();
 
     public static MemEntity toEntity(MemDTO memDTO) {
         return MemEntity.builder()
