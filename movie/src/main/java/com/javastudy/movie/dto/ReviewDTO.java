@@ -2,8 +2,6 @@ package com.javastudy.movie.dto;
 
 import java.time.LocalDateTime;
 
-import com.javastudy.movie.entity.MemEntity;
-import com.javastudy.movie.entity.MovieEntity;
 import com.javastudy.movie.entity.ReviewEntity;
 
 import lombok.AllArgsConstructor;
@@ -21,20 +19,20 @@ import lombok.ToString;
 @Builder
 public class ReviewDTO {
     private Long reviewNum;
+    private Long filmNum;
+    private String memId;
     private String reviewText;
     private double grade;
     private LocalDateTime writeDate;
-    private Long movieNum;
-    private Long memNum;
 
-    public static ReviewDTO toDTO(ReviewEntity reviewEntity, Long movieNum, Long memNum) {
+    public static ReviewDTO toDTO(ReviewEntity reviewEntity, Long filmNum, String memId) {
         return ReviewDTO.builder()
                 .reviewNum(reviewEntity.getReviewNum())
                 .reviewText(reviewEntity.getReviewText())
                 .grade(reviewEntity.getGrade())
                 .writeDate(reviewEntity.getWriteDate())
-                .movieNum(movieNum)
-                .memNum(memNum)
+                .filmNum(filmNum)
+                .memId(memId)
                 .build();
     }
 }
