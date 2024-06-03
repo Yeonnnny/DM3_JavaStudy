@@ -3,9 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CashBook</title>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- CK Editor -->
+    <script th:src="@{/script/ckeditor.js}"></script>
+    <script>
+        $(function () {
+            // CKEditor 초기화
+            let ckEditorInstance;
+            ClassicEditor.create(document.querySelector("#ckeditor"), {
+                language: "ko"
+            }).then(editor => {
+                ckEditorInstance = editor;
+            }).catch(error => {
+                console.error("CKEditor error:", error);
+            });
+
+            // 가계부 등록
+            $("#createBtn").on("click", function () {
+                // CKEditor에서 텍스트 가져오기
+                let contents = ckEditorInstance.getData().trim();
+                if (!contents) {
+                    alert("Please fill in the memo field.");
+                    return; // 첫 번째 빈 필드 반환
+                }
+                $("#memo").val(contents); // 폼의 hidden 필드에 값 설정
+                $("#createForm").submit();
+                alert("추가 완료!");
+            });
+
+            // 가계부 삭제
+            $(".deleteBtn").on("click",deleteCashbook);
+    
+            // 초기 화면 데이터 채우는 함수
+            init();
+        });
+
+        // 가계부 삭제
+        function deleteCashbook() {
+            let memberId = $("#memberId").val();
+            let infoNum = $(this).data("num");
+            $.ajax({
+                url:"/cashbook/myCashbook/getList",
+                data:{"memberId":memberId,"infoNum":infoNum},
+                method:"GET",
+                success: function (list) {
+                    alert("삭제되었습니다.");
+                    $("#result").replaceWith(list);
+                    $(".deleteBtn").on("click",deleteCashbook);
+                    // 잔액 
+                    $.ajax({
+                        url:"/cashbook/myCashbook/getBalance",
+                        method:"GET",
+                        data:{"memberId":memberId},
+                        success:function(resp){
+                            $("#balance").text(resp);
+                        }
+                    });
+                }
+            });
+        }
+
+        // 초기 화면 채우는 함수
+        function init() {
+            let memberId = $("#memberId").val();
+            $.ajax({
+                url:"/cashbook/myCashbook/getList",
+                method:"GET",
+                data:{"memberId":memberId},
+                success: function (list) {
+                    $("#result").replaceWith(list);
+                    $(".deleteBtn").on("click",deleteCashbook);
+                    // 잔액 
+                    $.ajax({
+                        url:"/cashbook/myCashbook/getBalance",
+                        method:"GET",
+                        data:{"memberId":memberId},
+                        success:function(resp){
+                            $("#balance").text(resp);
+                        }
+                    });
+                }
+            });
+        }
+        
+		
+    </script>
 </head>
 <body>
+    <input type="hidden" name="" id="memberId" th:value="${#authentication.name}">
     
+    <h2> [[${#authentication.name}]]님의 가계부 </h2>
+    <br>
+
+    <!-- 가계부에 내용 추가 -->
+    <form th:action="@{/myCashbook/create}" method="post" id="createForm">
+        <input type="hidden" name="memberId" th:value="${#authentication.name}">
+        <table>
+            <tr>
+                <td>구분</td>
+                <td>
+                    <input type="radio" name="type" id="" value="income" selected>수입
+                    <input type="radio" name="type" id="" value="expense">지출
+                </td>
+            </tr>
+            <tr>
+                <td>메모</td>
+                <td>
+                    <div name="editor" id="ckeditor"></div>
+                    <input type="hidden" name="memo" id="memo">
+                </td>
+            </tr>
+            <tr>
+                <td>금액</td>
+                <td><input type="number" name="amount" id="amount" min="0"></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" id="createBtn" value="등록">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <br>
+    <br>
+    <br>
+
+    <!-- 가계부 리스트 -->
+    <table>
+        <thead>
+            <tr>
+                <th>날짜</th>
+                <th>구분</th>
+                <th>메모</th>
+                <th>금액</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody id="result">
+            <tr th:if="${list==null or #lists.isEmpty(list)}">
+                <td>
+                    <span> 가계부가 존재하지 않습니다. </span>
+                </td>
+            </tr>
+            <tr th:unless="${list==null or #lists.isEmpty(list)}" th:each="cashbook, i : ${list}">
+                <td th:text="${#temporals.format(cashbook.inputDate, 'yyyy.MM.dd HH:mm')}">></td>
+                <td th:text="${cashbook.type}"></td>
+                <td th:utext="${cashbook.memo}"></td>
+                <td th:text="${cashbook.amount}"></td>
+                <td> <input type="button" value="삭제" class="deleteBtn" th:data-num="${cashbook.infoNum}"></td>
+            </tr>
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="3">잔액</td>
+                <td id="balance"></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+
 </body>
 </html>

@@ -3,9 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>연도별 통계</title>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        $(function () {
+            donut();
+        });
+
+        function donut() {
+            // 데이터 및 설정 정의
+            const data = {
+                labels: [
+                    'Income',
+                    'Expense',
+                ],
+                datasets: [{
+                    label: '일별 통계',
+                    data: [50, 50],
+                    backgroundColor: [
+                        'rgb(75, 192, 192)', //녹색
+                        'rgb(255, 99, 132)'  //빨강
+                    ],
+                    hoverOffset: 4
+                }]
+            };
+    
+            // 도넛 차트 생성
+            const config = {
+                type: 'doughnut',
+                data: data,
+            };
+    
+            const myDonutChart = new Chart(
+                document.getElementById('myDonutChart'),
+                config
+            );
+        }
+    </script>
+
 </head>
 <body>
-    
+    <input type="hidden" name="" id="memberId" th:value="${#authentication.name}">
+    <h2> [[${#authentication.name}]] 님의 가계부 - 통계 </h2>
+
+    <div>
+
+
+    </div>
+
+
+    <h1>My Donut Chart</h1>
+    <canvas id="myDonutChart" width="100" height="100"></canvas>
+
+
 </body>
 </html>

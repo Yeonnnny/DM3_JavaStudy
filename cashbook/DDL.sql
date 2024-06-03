@@ -6,7 +6,7 @@ create table cashbook_member(
     member_pw varchar2(100) not null,
     member_name varchar2(20) not null,
     enabled number(1) default 1 check(enabled in (0,1)),
-    rolename varchar2(20) default "ROLE_USER"
+    rolename varchar2(20) default 'ROLE_USER'
 );
 
 select * from cashbook_member;

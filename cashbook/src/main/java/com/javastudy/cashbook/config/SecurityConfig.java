@@ -1,5 +1,6 @@
 package com.javastudy.cashbook.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,18 +18,18 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig {
     private final MemberFailureHandler failuerHandler;
 
+    @Value("${server.servlet.context-path}")
+    String contextPath;
+
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         
         // permitAll
         http.authorizeHttpRequests((auth)->auth.requestMatchers("/",
             "/join",
+            "/join/isExistId", //회원가입 시 아이디 존재여부 확인
             "/joinProc",
             "/login",
-            "/cashbook/main",
-            "/cashbook/create",
-            "/cashbook/delete",
-            "/statics",
             "/script").permitAll()
             .anyRequest().authenticated());
 
@@ -37,6 +38,7 @@ public class SecurityConfig {
                 .usernameParameter("memberId")
                 .passwordParameter("memberPw")
                 .failureHandler(failuerHandler)
+                .defaultSuccessUrl("/")
                 .loginProcessingUrl("/loginProc")
                 .permitAll());
         

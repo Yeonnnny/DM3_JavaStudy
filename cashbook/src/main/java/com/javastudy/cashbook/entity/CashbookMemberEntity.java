@@ -40,7 +40,7 @@ public class CashbookMemberEntity {
 
     private boolean enabled;
     
-    private String rolname;
+    private String rolename;
 
     // 자식 (가계부 정보)
     @OneToMany(mappedBy = "cashbookMemberEntity", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, orphanRemoval = true)
@@ -53,7 +53,7 @@ public class CashbookMemberEntity {
             .memberPw(dto.getMemberPw())
             .memberName(dto.getMemberName())
             .enabled(dto.isEnabled())
-            .rolname(dto.getRolname())
+            .rolename(dto.getRolename())
             .build();
     }
 }

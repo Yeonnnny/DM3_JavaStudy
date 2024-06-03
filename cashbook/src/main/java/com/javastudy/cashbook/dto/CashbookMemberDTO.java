@@ -19,15 +19,15 @@ public class CashbookMemberDTO {
     private String memberPw;
     private String memberName;
     private boolean enabled;
-    private String rolname;
+    private String rolename;
 
-    public CashbookMemberDTO toDTO(CashbookMemberEntity entity){
+    public static CashbookMemberDTO toDTO(CashbookMemberEntity entity){
         return CashbookMemberDTO.builder()
             .memberId(entity.getMemberId())
             .memberPw(entity.getMemberPw())
             .memberName(entity.getMemberName())
             .enabled(entity.isEnabled())
-            .rolname(entity.getRolname())
+            .rolename(entity.getRolename())
             .build();
     }
 }

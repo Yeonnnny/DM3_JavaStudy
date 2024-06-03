@@ -2,7 +2,7 @@ package com.javastudy.cashbook.entity;
 
 import java.time.LocalDateTime;
 
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.javastudy.cashbook.dto.CashbookInfoDTO;
 import com.javastudy.cashbook.dto.TypeEnum;
@@ -49,7 +49,7 @@ public class CashbookInfoEntity {
     //FK
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
-    private CashbookMemberEntity entity;
+    private CashbookMemberEntity cashbookMemberEntity;
     
     @Column(name = "type", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -60,14 +60,15 @@ public class CashbookInfoEntity {
 
     private int amount;
     
-    @CreatedDate
+    @Column(name="input_date")
+    @CreationTimestamp
     private LocalDateTime inputDate;
 
 
     public static CashbookInfoEntity toEntity(CashbookInfoDTO dto, CashbookMemberEntity entity){
         return CashbookInfoEntity.builder()
             .infoNum(dto.getInfoNum())
-            .entity(entity)
+            .cashbookMemberEntity(entity)
             .type(dto.getType())
             .memo(dto.getMemo())
             .amount(dto.getAmount())

@@ -26,6 +26,16 @@
             "projectName": "movie",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-CashbookApplication<cashbook>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.javastudy.cashbook.CashbookApplication",
+            "projectName": "cashbook",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

@@ -4,8 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <!-- 유효성검사 -->
+    <!-- <script th:src="@{/script/jquery-3.7.1.min.js}"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#memberId").on("keyup",validateId);
+            $("#memberPw").on("keyup",validatePw);
+            $("#memberPwConfirm").on("keyup",validateConfirmPw);
+            $("#submitBtn").on("click",vaildateSubmit);
+        });
+
+        // 아이디 확인
+        function validateId(){
+            let memberId = $(this).val().trim();
+            console.log("memberId : "+memberId);
+            if (memberId.length<3 || memberId.length>10) {
+                $("#notValidableID").text("아이디는 3~10자로 입력해야 합니다.").css({"color":"red","font-size":"small"});
+            }
+            else{
+                // 아이디 사용가능 여부 확인(DB에 존재하는지 확인)
+                $.ajax({
+                    url:"/cashbook/join/isExistId",
+                    data:{"memberId":memberId},
+                    method:"GET",
+                    success: function (result) {
+                        console.log("결과 : "+result);
+                        if (result) {
+                            $("#notValidableID").text("이미 존재하는 아이디입니다.").css({"color":"red","font-size":"small"});
+                        }else{
+                            $("#notValidableID").text("사용가능한 아이디입니다.").css({"color":"blue","font-size":"small"});
+                        }
+                    }
+                })
+            }
+        }
+
+        // 비밀번호 확인
+        function validatePw(){
+            if ($(this).val().trim().length<3 || $(this).val().trim().length>10) {
+                $("#notValidablePW").text("비밀번호는 3~10자로 입력해야 합니다.").css({"color":"red","font-size":"small"});
+            }else{
+                $("#notValidablePW").text("사용 가능한 비밀번호입니다.").css({"color":"blue","font-size":"small"});
+            }
+        }
+
+        // 비밀번호 일치 확인
+        function validateConfirmPw(){
+            let pw = $("#memberPw").val().trim();
+            let confirmPw = $(this).val().trim();
+            if (pw!=confirmPw) {
+                $("#notValidablePWConfrim").text("비밀번호가 일치하지 않습니다.").css({"color":"red","font-size":"small"});
+            }else{
+                $("#notValidablePWConfrim").text("비밀번호가 일치합니다.").css({"color":"blue","font-size":"small"});
+            }
+        }
+        
+        // 입력 확인 후 가입
+        function vaildateSubmit(){
+            let id = $("#memberId").val().trim().length;
+            let pw = $("#memberPw").val().trim().length;
+            let pwConfirm = $("#memberPwConfirm").val().trim().length;
+            let name = $("#memberName").val().trim().length;
+
+            if (id==0) {
+                alert("아이디를 입력하세요");
+                $("#memberId").select();
+                return;
+            }
+            if (pw==0) {
+                alert("비밀번호를 입력하세요");
+                $("#memberPw").select();
+                return;
+            }
+            if (pwConfirm==0) {
+                alert("비밀번호를 확인해주세요");
+                $("#memberPwConfirm").select();
+                return;
+            }
+            if (name==0) {
+                alert("이름을 입력하세요");
+                $("#memberName").select();
+                return;
+            }
+            $("#joinForm").submit();
+            alert("회원가입이 완료되었습니다.");
+        }
+
+    </script>
+    
 </head>
 <body>
-    
+    <h2>[ 회원가입 ]</h2>
+    <form th:action="@{/joinProc}" method="post" id="joinForm">
+        <table>
+            <tr>
+                <td>아이디</td>
+                <td> 
+                    <input type="text" id="memberId" name="memberId">
+                    <span id="notValidableID"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>비밀번호</td>
+                <td> 
+                    <input type="password" id="memberPw" name="memberPw">
+                    <span id="notValidablePW"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>비밀번호 확인</td>
+                <td> 
+                    <input type="password" id="memberPwConfirm">
+                    <span id="notValidablePWConfrim"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>이름</td>
+                <td> <input type="text" id="memberName" name="memberName"></td>
+            </tr>
+            <tr>
+                <td><input type="button" id="submitBtn" value="가입"></td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+
 </body>
 </html>

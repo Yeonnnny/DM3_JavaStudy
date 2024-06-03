@@ -3,9 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+
+    <!-- 유효성검사 -->
+    <!-- <script th:src="@{/script/jquery-3.7.1.min.js}"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#memberId").on("keyup",validateId);
+            $("#memberPw").on("keyup",validatePw);
+            $("#submitBtn").on("click",vaildateSubmit);
+        });
+
+        // 아이디 확인
+        function validateId(){
+            if ($(this).val().trim().length<3 || $(this).val().trim().length>10) {
+                $("#notValidableID").text("아이디는 3~10자로 입력해야 합니다.").css({"color":"red","font-size":"small"});
+            }else{
+                $("#notValidableID").text("");
+            }
+        }
+        // 비밀번호 확인
+        function validatePw(){
+            if ($(this).val().trim().length<3 || $(this).val().trim().length>10) {
+                $("#notValidablePW").text("비밀번호는 3~10자로 입력해야 합니다.").css({"color":"red","font-size":"small"});
+            }else{
+                $("#notValidablePW").text("");
+            }
+        }
+
+        
+        // 입력확인 후 가입
+        function vaildateSubmit(){
+            let id = $("#memberId").val().trim().length;
+            let pw = $("#memberPw").val().trim().length;
+            
+            if (id==0) {
+                alert("아이디를 입력하세요");
+                $("#memberId").select();
+                return;
+            }
+            if (pw==0) {
+                alert("비밀번호를 입력하세요");
+                $("#memberPw").select();
+                return;
+            }
+            
+            $("#loginForm").submit();
+        }
+
+    </script>
 </head>
 <body>
     
+    <h2>[ 로그인 ]</h2>
+    <form th:action="@{/loginProc}" method="post" id="loginForm">
+        <table>
+            <tr>
+                <td>아이디</td>
+                <td> 
+                    <input type="text" id="memberId" name="memberId">
+                    <span id="notValidableID"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>비밀번호</td>
+                <td> 
+                    <input type="password" id="memberPw" name="memberPw">
+                    <span id="notValidablePW"></span>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="button" id="submitBtn" value="로그인"></td>
+                <td><input type="reset" value="취소"></td>
+            </tr>
+        </table>
+    </form>
 </body>
 </html>

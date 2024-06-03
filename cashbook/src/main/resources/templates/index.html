@@ -10,9 +10,9 @@
     <a sec:authorize="isAnonymous()" th:href="@{/join}">회원가입</a>
     <a sec:authorize="isAnonymous()"th:href="@{/login}">로그인</a>
     
-    <h3>[[${#authentication.name}]]님 환영합니다.</h3>
+    <h3 sec:authorize="isAuthenticated()">[[${#authentication.name}]]님 환영합니다.</h3>
     <a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
-    <a sec:authorize="isAuthenticated()" th:href="@{/cashbook}">가계부</a>
+    <a sec:authorize="isAuthenticated()" th:href="@{/myCashbook/main}">가계부</a>
     <a sec:authorize="isAuthenticated()" th:href="@{/statics}">연도별 통계</a>
 
 </body>
