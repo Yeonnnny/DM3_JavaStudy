@@ -5,61 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>연도별 통계</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+        
+    <!-- css 파일 -->
+    <link rel="stylesheet" th:href="@{/css/calendar.css}">
+    <!-- <link rel="stylesheet" href="../static/css/calendar.css"> -->
+
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
+    
     <!-- chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        $(function () {
-            donut();
-        });
 
-        function donut() {
-            // 데이터 및 설정 정의
-            const data = {
-                labels: [
-                    'Income',
-                    'Expense',
-                ],
-                datasets: [{
-                    label: '일별 통계',
-                    data: [50, 50],
-                    backgroundColor: [
-                        'rgb(75, 192, 192)', //녹색
-                        'rgb(255, 99, 132)'  //빨강
-                    ],
-                    hoverOffset: 4
-                }]
-            };
-    
-            // 도넛 차트 생성
-            const config = {
-                type: 'doughnut',
-                data: data,
-            };
-    
-            const myDonutChart = new Chart(
-                document.getElementById('myDonutChart'),
-                config
-            );
-        }
-    </script>
+
+
+    <!-- js 파일 (body태그 내에 있음.. 마지막 부분에..)-->
+    <!-- <script th:src="@{/script/calendar.js}"></script> -->
+    <!-- <script th:src="@{/script/dailyChart.js}"></script> -->
 
 </head>
 <body>
     <input type="hidden" name="" id="memberId" th:value="${#authentication.name}">
-    <h2> [[${#authentication.name}]] 님의 가계부 - 통계 </h2>
-
-    <div>
-
+    <!-- <input type="hidden" name="" id="memberId" value="kdo"> -->
+    
+    <div class="top">
+        <h1> [[${#authentication.name}]] 님의 가계부 - 통계 </h1>
 
     </div>
 
+    <div class="body">
 
-    <h1>My Donut Chart</h1>
-    <canvas id="myDonutChart" width="100" height="100"></canvas>
+        <div class="container">
+            <div class="calendar">
+                <div class="header">
+                    <div class="month"></div>
+                    <div class="btns">
+                        <div class="btn today-btn">
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                        <div class="btn prev-btn">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                        <div class="btn next-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="weekdays">
+                    <div class="day">Sun</div>
+                    <div class="day">Mon</div>
+                    <div class="day">Tue</div>
+                    <div class="day">Wed</div>
+                    <div class="day">Thu</div>
+                    <div class="day">Fri</div>
+                    <div class="day">Sat</div>
+                </div>
+                <div class="days">
+                    
+                </div>
+            </div>
+            <div class="Chart">
+                <div class="dailyChart">
+                    <canvas id="myDonutChart" width="200" height="200" style="width: 200px; height: 200px;"></canvas>
+                </div>
+        
+                <div class="dailyDetail">
+        
+                </div>
+    
+            </div>
+        </div>
 
+    </div>
+    <!-- <script src="../static/script/calendar.js"></script> -->
+    <script th:src="@{/script/calendarJQuery.js}"></script>
+    <!-- <script src="../static/script/calendarJQuery.js"></script> -->
 
+    
 </body>
 </html>

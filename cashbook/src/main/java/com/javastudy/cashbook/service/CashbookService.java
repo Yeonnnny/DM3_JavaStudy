@@ -1,7 +1,12 @@
 package com.javastudy.cashbook.service;
 
+import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -82,6 +87,44 @@ public class CashbookService {
             balance = cashbookInfoRepository.getTotalAmountByMemberId(memberId); 
         }
         return balance;
+    }
+
+
+    /**
+     * 전달받은 memberId이 작성한 info들 중 
+     * 전달받은 날짜에 해당하는 info들의 income/expense 각각의 금액 반환하는 함수
+     * @param memberId
+     * @param year
+     * @param month
+     * @param day
+     * @return
+     */
+    public List<Map<String, Object>> getValue(String memberId, int year, int month, int day) {
+        // 반환할 결과 담을 List
+        List<Map<String, Object>> result = new ArrayList<>();
+
+        // 검색할 날짜
+        LocalDateTime todayStart = LocalDate.of(year, month, day).atStartOfDay();
+        LocalDateTime todayEnd = LocalDate.of(year, month, day).plusDays(1).atStartOfDay();
+        log.info("{} - {} - {}",memberId, todayStart,todayEnd);
+        // memberId와 검색 날짜에 해당하는 info들의 type(income/expense)별 총합
+        try {
+            long income = cashbookInfoRepository.sumAmountByMemberIdAndDateRangeAndTypeIncome(memberId, todayStart, todayEnd)==null?0:cashbookInfoRepository.sumAmountByMemberIdAndDateRangeAndTypeIncome(memberId, todayStart, todayEnd);
+            log.info("======Service : income - {}", income);
+            long expense = cashbookInfoRepository.sumAmountByMemberIdAndDateRangeAndTypeExpense(memberId, todayStart, todayEnd)==null?0:cashbookInfoRepository.sumAmountByMemberIdAndDateRangeAndTypeExpense(memberId, todayStart, todayEnd);
+            log.info("======Service : expense - {}", expense);
+            
+            // 결과 세팅
+            Map<String, Object> data = new HashMap<>();
+            data.put("Income", income);
+            data.put("Expense", expense);
+            result.add(data);
+
+        } catch (Exception e) {
+            return null;
+        }
+
+        return result;
     }
 
     

@@ -1,6 +1,7 @@
 package com.javastudy.cashbook.repository;
 
 import java.util.List;
+import java.time.LocalDateTime;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +20,12 @@ public interface CashbookInfoRepository extends JpaRepository<CashbookInfoEntity
     // memberId에 해당하는 회원의 type에 따른 amount 총합(income(+)/expense(-))
     @Query("SELECT SUM(CASE WHEN c.type = 'income' THEN c.amount WHEN c.type = 'expense' THEN -c.amount ELSE 0 END) FROM CashbookInfoEntity c WHERE c.cashbookMemberEntity.memberId = :memberId")
     Long getTotalAmountByMemberId(@Param("memberId") String memberId);
+    
+    //memberId에 해당하고, inputDate가 전달된 날짜 사이에 해당하고, type이 income인 데이터들의 amount 합
+    @Query("SELECT SUM(c.amount) FROM CashbookInfoEntity c WHERE c.cashbookMemberEntity.memberId = :memberId AND c.inputDate BETWEEN :todayStart AND :todayEnd AND c.type = 'income'")
+    Long sumAmountByMemberIdAndDateRangeAndTypeIncome(@Param("memberId") String memberId, @Param("todayStart") LocalDateTime todayStart, @Param("todayEnd") LocalDateTime todayEnd);
+    
+    //memberId에 해당하고, inputDate가 전달된 날짜 사이에 해당하고, type이 expense 데이터들의 amount 합
+    @Query("SELECT SUM(c.amount) FROM CashbookInfoEntity c WHERE c.cashbookMemberEntity.memberId = :memberId AND c.inputDate BETWEEN :todayStart AND :todayEnd AND c.type = 'expense'")
+    Long sumAmountByMemberIdAndDateRangeAndTypeExpense(@Param("memberId") String memberId, @Param("todayStart") LocalDateTime todayStart, @Param("todayEnd") LocalDateTime todayEnd);
 }
