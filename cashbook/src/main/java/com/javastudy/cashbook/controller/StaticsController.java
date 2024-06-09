@@ -36,10 +36,7 @@ public class StaticsController {
         @RequestParam(name = "year") int year,
         @RequestParam(name = "month") int month,
         @RequestParam(name = "day") int day) {
-
-        // month가 0부터 시작하는 값이기 때문에 1 더해줌
-        // month++;
-
+            
         return cashbookService.getValue(memberId,year,month,day);
     }
     

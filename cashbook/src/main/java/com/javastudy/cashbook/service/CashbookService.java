@@ -110,9 +110,7 @@ public class CashbookService {
         // memberId와 검색 날짜에 해당하는 info들의 type(income/expense)별 총합
         try {
             long income = cashbookInfoRepository.sumAmountByMemberIdAndDateRangeAndTypeIncome(memberId, todayStart, todayEnd)==null?0:cashbookInfoRepository.sumAmountByMemberIdAndDateRangeAndTypeIncome(memberId, todayStart, todayEnd);
-            log.info("======Service : income - {}", income);
             long expense = cashbookInfoRepository.sumAmountByMemberIdAndDateRangeAndTypeExpense(memberId, todayStart, todayEnd)==null?0:cashbookInfoRepository.sumAmountByMemberIdAndDateRangeAndTypeExpense(memberId, todayStart, todayEnd);
-            log.info("======Service : expense - {}", expense);
             
             // 결과 세팅
             Map<String, Object> data = new HashMap<>();
